@@ -1,6 +1,7 @@
 {
   "name": "architecture-lab",
   "private": true,
+  "license": "UNLICENSED",
   "packageManager": "pnpm@10.18.0",
   "engines": {
     "node": ">=22"

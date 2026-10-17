@@ -4,7 +4,7 @@ import type { LabMode } from "@architecture-lab/content";
 import { SPEED_PRESETS, resolveFrames } from "@architecture-lab/simulation-engine";
 import dynamic from "next/dynamic";
 import { useState } from "react";
-import { useSimulation } from "./use-simulation";
+import { PLAYBACK_STEP_MS, useSimulation } from "./use-simulation";
 
 const ArchitectureDiagram = dynamic(
   () => import("./architecture-diagram").then((module) => module.ArchitectureDiagram),
@@ -13,6 +13,15 @@ const ArchitectureDiagram = dynamic(
     loading: () => <div className="diagram-canvas" aria-hidden="true" />,
   },
 );
+
+function formatSpeed(speed: number): string {
+  return `${speed.toLocaleString("pt-BR")}×`;
+}
+
+function formatStepDuration(milliseconds: number): string {
+  const seconds = milliseconds / 1000;
+  return `${seconds.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })} s`;
+}
 
 const STATUS_LABEL: Record<string, string> = {
   inactive: "em espera",
@@ -181,20 +190,23 @@ function ModeLab({
               Reiniciar
             </button>
           </fieldset>
-          <fieldset className="speed-row">
+          <fieldset className="choice-row speed-row" aria-describedby="speed-cadence">
             <legend>Velocidade</legend>
             {SPEED_PRESETS.map((speed) => (
-              <button
-                key={speed}
-                type="button"
-                className="button"
-                aria-pressed={snapshot.speed === speed}
-                onClick={() => dispatch({ type: "setSpeed", speed })}
-              >
-                {speed}×
-              </button>
+              <label key={speed} className="choice">
+                <input
+                  type="radio"
+                  name={`speed-${mode.id}`}
+                  checked={snapshot.speed === speed}
+                  onChange={() => dispatch({ type: "setSpeed", speed })}
+                />
+                <span>{formatSpeed(speed)}</span>
+              </label>
             ))}
           </fieldset>
+          <p id="speed-cadence" className="key-hint">
+            Cada etapa automática leva {formatStepDuration(PLAYBACK_STEP_MS / snapshot.speed)}.
+          </p>
           <p className="key-hint">Espaço inicia ou pausa. As setas mudam a etapa.</p>
         </aside>
       </div>

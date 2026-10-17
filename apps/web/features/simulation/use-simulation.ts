@@ -12,6 +12,8 @@ import type {
 } from "@architecture-lab/simulation-engine";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
+export const PLAYBACK_STEP_MS = 1600;
+
 export function useSimulation(definition: SimulationDefinition) {
   const [state, setState] = useState<SimulationRunState>(() => createInitialRunState());
   const [definitionId, setDefinitionId] = useState(definition.id);
@@ -35,7 +37,7 @@ export function useSimulation(definition: SimulationDefinition) {
       return;
     }
     const stepIndex = snapshot.stepIndex;
-    const delay = Math.round(1600 / snapshot.speed);
+    const delay = Math.round(PLAYBACK_STEP_MS / snapshot.speed);
     const timer = window.setTimeout(() => {
       setState((current) => {
         if (current.stepIndex !== stepIndex) {

@@ -39,6 +39,17 @@ export default function AboutPage() {
           </p>
         </article>
       </section>
+      <section className="section author-panel">
+        <p className="kicker">Autoria</p>
+        <h2>Matheus Souza</h2>
+        <p>
+          O laboratório fica sob a tutela de Matheus Souza. O site reúne engenharia, arquitetura de
+          sistemas e liderança técnica.
+        </p>
+        <a className="button secondary" href="https://mathneves.com/">
+          mathneves.com
+        </a>
+      </section>
     </div>
   );
 }
