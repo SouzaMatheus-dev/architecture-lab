@@ -67,6 +67,19 @@ describe("transactional outbox simulations", () => {
     expect(recovered?.tables.consumerLog).toHaveLength(1);
   });
 
+  it("leaves an accepted event behind when the transaction fails after publish", () => {
+    const frames = resolveFrames(withoutOutboxSimulation, "message-without-order");
+    const publish = frames.findIndex((frame) => frame.event.type === "broker.publish");
+    const commit = frames.findIndex((frame) => frame.event.type === "db.commit");
+    expect(publish).toBeGreaterThanOrEqual(0);
+    expect(commit).toBeGreaterThan(publish);
+    expect(frames[publish]?.tables.orders).toEqual([]);
+    const last = frames.at(-1);
+    expect(last?.tables.orders).toEqual([]);
+    expect(last?.tables.consumerLog?.[0]?.cells.Resultado).toBe("Aplicado sem pedido");
+    expect(last?.notes.join(" ")).toContain("não alcança o broker");
+  });
+
   it("loses the event in the naive Kafka failure and leaves the order behind", () => {
     const frames = resolveFrames(withoutOutboxSimulation, "kafka-unavailable");
     const last = frames.at(-1);
@@ -142,6 +155,11 @@ describe("transactional outbox simulations", () => {
   it("finishes every script at the last frame", () => {
     for (const failure of withOutboxSimulation.failures) {
       const snapshots = play(withOutboxSimulation, failure.id);
+      expect(snapshots.at(-1)?.status).toBe("completed");
+      expect(snapshots.at(-1)?.stepIndex).toBe(failure.frames.length - 1);
+    }
+    for (const failure of withoutOutboxSimulation.failures) {
+      const snapshots = play(withoutOutboxSimulation, failure.id);
       expect(snapshots.at(-1)?.status).toBe("completed");
       expect(snapshots.at(-1)?.stepIndex).toBe(failure.frames.length - 1);
     }

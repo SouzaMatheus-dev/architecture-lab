@@ -87,7 +87,7 @@ A aplicação abre em `http://localhost:3000`. O catálogo fica em `/patterns`.
 
 O site público está em [architecture-lab-gamma.vercel.app](https://architecture-lab-gamma.vercel.app). Na Vercel, o diretório raiz da aplicação é `apps/web`. O passo a passo está em `docs/development/vercel.md`.
 
-Mudanças entram em `main` por pull request. Cada publicação gera uma [GitHub Release](https://github.com/SouzaMatheus-dev/architecture-lab/releases). A versão atual do produto é `0.2.3`.
+Mudanças entram em `main` por pull request. Cada publicação gera uma [GitHub Release](https://github.com/SouzaMatheus-dev/architecture-lab/releases). A versão atual do produto é `0.2.4`.
 
 Defina `NEXT_PUBLIC_SITE_URL` com a URL pública para metadados e sitemap.
 

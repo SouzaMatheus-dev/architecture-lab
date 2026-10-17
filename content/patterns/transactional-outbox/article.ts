@@ -47,14 +47,14 @@ export const transactionalOutboxArticle = {
     title: "Problema",
     paragraphs: [
       "Um serviço precisa gravar uma mudança de negócio e avisar outros serviços. Se a gravação e a publicação são operações separadas, qualquer falha no meio deixa um dos lados sem o outro.",
-      "No pedido, isso aparece como uma linha em Orders sem o evento OrderCreated, ou como uma tentativa de retry que cria um segundo pedido. O cliente e os consumidores passam a enxergar histórias diferentes.",
+      "No pedido, isso aparece de dois jeitos. O commit pode acontecer e o evento se perder. Ou o broker pode aceitar OrderCreated e a transação local falhar, deixando um evento sem o pedido. Uma nova tentativa do POST ainda pode criar um segundo pedido.",
     ],
   },
   comparison: {
     id: "antes-e-depois",
     title: "Antes e depois",
     paragraphs: [
-      "Sem Outbox, o Order Service confirma o pedido e depois chama o Kafka. A resposta da API também pode ficar presa à disponibilidade do broker.",
+      "Sem Outbox, gravar o pedido e publicar são operações separadas. No fluxo normal o commit vem primeiro. A falha do Kafka deixa o pedido sem evento. A outra ordem publica primeiro: se a transação falha depois, o evento fica sem o pedido.",
       "Com Outbox, o serviço grava o pedido e a mensagem na mesma transação local. A API responde em seguida. Um worker publica as mensagens pendentes e marca o que já foi enviado.",
     ],
   },
@@ -118,10 +118,35 @@ export const transactionalOutboxArticle = {
       "O limite de três tentativas e os nomes das tabelas são escolhas didáticas.",
     ],
   },
-  exercise: {
-    question:
-      "O Kafka confirmou a publicação, mas o worker parou antes de marcar a Outbox como processada. O que o consumidor precisa garantir quando a mensagem reaparecer?",
-    answer:
-      "Idempotência. A mesma mensagem pode ser publicada outra vez, porque o ack do broker e a atualização da Outbox não acontecem na mesma transação. O consumidor deve reconhecer a cópia já aplicada e não repetir o efeito.",
-  },
+  exercise: [
+    {
+      question:
+        "O Kafka confirmou a publicação, mas o worker parou antes de marcar a Outbox como processada. O que o consumidor precisa garantir quando a mensagem reaparecer?",
+      answer:
+        "Idempotência. A mesma mensagem pode ser publicada outra vez, porque o ack do broker e a atualização da Outbox não acontecem na mesma transação. O consumidor reconhece a cópia já aplicada e não repete o efeito.",
+    },
+    {
+      question:
+        "Sem Outbox, o Kafka aceita OrderCreated e a transação do pedido falha em seguida. O que fica inconsistente?",
+      answer:
+        "O evento existe e o pedido não. O consumidor pode aplicar um efeito para uma mudança que não foi confirmada. O rollback local não apaga a mensagem que o broker já aceitou.",
+    },
+    {
+      question:
+        "Sem Outbox, o pedido é confirmado e o Kafka falha. Por que repetir o POST não é um retry seguro?",
+      answer:
+        "O pedido já existe e não há uma pendência durável para retomar a publicação. Um novo POST pode criar outro pedido. Tratar o erro como ausência de pedido esconde a gravação que já ocorreu.",
+    },
+    {
+      question:
+        "O worker recebe o ack e cai antes de atualizar a Outbox. O padrão garantiu entrega exatamente uma vez?",
+      answer:
+        "Não. Essa janela pode publicar a mensagem de novo. O Outbox registra a intenção e sobrevive à queda do broker. A entrega repetida continua possível.",
+    },
+    {
+      question: "Por que o pedido e a mensagem entram na mesma transação local?",
+      answer:
+        "Para os dois serem confirmados ou revertidos juntos. Se a transação falha, não sobra pedido sem intenção de publicar, nem intenção sem o pedido.",
+    },
+  ],
 };

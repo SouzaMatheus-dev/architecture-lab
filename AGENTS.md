@@ -43,16 +43,20 @@ O MVP é uma aplicação web estática e interativa. Não adicionar autenticaç�
 - Tratar consumidor idempotente como parte do desenho, não como detalhe opcional.
 - Nomear simplificações didáticas, inclusive limites de retry e a escolha entre polling e CDC.
 - O exemplo .NET deve usar a mesma transação local para o pedido e a mensagem. O dispatcher simplificado deve dizer o que falta para produção.
+- No caminho sem o padrão, as duas ordens da operação partida ficam visíveis. No Outbox: pedido sem evento e evento sem pedido. No Inbox: efeito repetido e ack sem efeito.
 
 ## Interface
 
-- Os controles de reprodução são botões com nome acessível.
+- Os controles de reprodução são botões com nome acessível. A velocidade fica na mesma linha, com o rótulo alinhado ao centro dos botões.
 - O estado dos componentes existe em texto, além do diagrama.
 - A narrativa da etapa atual usa uma região `aria-live`.
 - O laboratório funciona com teclado: Espaço e setas.
 - Respeitar `prefers-reduced-motion`.
 - O diagrama pode ser ampliado. A lista de estados continua disponível em telas estreitas.
 - O laboratório se lê em quatro passos: cenário, percurso, o que acontece agora e registros.
+- A seção "Como ler a simulação" fica antes do laboratório, em toda página de padrão, com os mesmos quatro passos da home.
+- Cada troca de etapa destaca o painel ao lado do diagrama. O destaque traz o número da etapa e uma marca persistente. A animação some quando o usuário pede menos movimento.
+- Cada padrão publicado tem um conjunto de exercícios. As questões cobrem o que o padrão não garante e as duas ordens da operação partida.
 - A marca do cabeçalho e o ícone do site usam o mesmo selo.
 
 ## Comandos oficiais

@@ -1,3 +1,4 @@
+import { LabReadingSteps } from "@/features/patterns/lab-reading";
 import { listPatterns } from "@architecture-lab/content";
 import Link from "next/link";
 
@@ -40,36 +41,7 @@ export default function HomePage() {
 
       <section className="section">
         <h2>Como ler o laboratório</h2>
-        <div className="grid-4">
-          <article className="panel">
-            <p className="bench-label">
-              <span>1</span> Cenário
-            </p>
-            <h3>Desenho e falha</h3>
-            <p>Com o padrão ou sem ele. Uma falha troca o roteiro inteiro e recomeça do início.</p>
-          </article>
-          <article className="panel">
-            <p className="bench-label">
-              <span>2</span> Percurso
-            </p>
-            <h3>A ordem dos eventos</h3>
-            <p>A trilha mostra cada etapa. O relógio só muda a velocidade, não o resultado.</p>
-          </article>
-          <article className="panel">
-            <p className="bench-label">
-              <span>3</span> Agora
-            </p>
-            <h3>O que esta etapa faz</h3>
-            <p>O texto ao lado do diagrama explica o evento que está na tela.</p>
-          </article>
-          <article className="panel">
-            <p className="bench-label">
-              <span>4</span> Registros
-            </p>
-            <h3>O que ficou gravado</h3>
-            <p>As tabelas provam o efeito: pedido, mensagem, cobrança ou ack.</p>
-          </article>
-        </div>
+        <LabReadingSteps />
       </section>
 
       <section className="section">

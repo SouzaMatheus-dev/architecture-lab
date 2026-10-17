@@ -114,6 +114,11 @@ describe("transactional inbox simulations", () => {
       expect(snapshots.at(-1)?.status).toBe("completed");
       expect(snapshots.at(-1)?.stepIndex).toBe(failure.frames.length - 1);
     }
+    for (const failure of withoutInboxSimulation.failures) {
+      const snapshots = play(withoutInboxSimulation, failure.id);
+      expect(snapshots.at(-1)?.status).toBe("completed");
+      expect(snapshots.at(-1)?.stepIndex).toBe(failure.frames.length - 1);
+    }
     expect(play(withoutInboxSimulation).at(-1)?.status).toBe("completed");
   });
 

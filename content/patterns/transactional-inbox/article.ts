@@ -42,7 +42,7 @@ export const transactionalInboxArticle = {
     id: "antes-e-depois",
     title: "Antes e depois",
     paragraphs: [
-      "Sem Inbox, o Billing grava a cobrança e só depois confirma o Kafka. Nada no banco lembra o identificador da mensagem. Uma reentrega repete a cobrança.",
+      "Sem Inbox, gravar a cobrança e confirmar o Kafka são operações separadas. Uma reentrega repete a cobrança, porque nada lembra o identificador da mensagem. A ordem inversa confirma o broker antes do efeito e a cobrança pode se perder.",
       "Com Inbox, a cobrança e o identificador entram na mesma transação local. O ack sai depois do commit. A próxima entrega encontra a mensagem e não repete o efeito.",
     ],
   },
@@ -105,10 +105,35 @@ export const transactionalInboxArticle = {
       "A retenção das linhas, o nome das tabelas e o limite de três tentativas são escolhas didáticas.",
     ],
   },
-  exercise: {
-    question:
-      "A cobrança e a inbox já foram confirmadas, mas o processo parou antes de enviar o ack. O Kafka entrega a mesma mensagem outra vez. O que o consumidor deve fazer?",
-    answer:
-      "Encontrar msg-1042 na inbox e não criar outra cobrança. Depois pode confirmar o offset. A repetição veio do broker; o efeito já está protegido pela transação local.",
-  },
+  exercise: [
+    {
+      question:
+        "A cobrança e a inbox já foram confirmadas, mas o processo parou antes de enviar o ack. O Kafka entrega a mesma mensagem outra vez. O que o consumidor deve fazer?",
+      answer:
+        "Encontrar msg-1042 na inbox e não criar outra cobrança. Depois pode confirmar o offset. A repetição veio do broker; o efeito já está protegido pela transação local.",
+    },
+    {
+      question:
+        "O consumidor confirma o Kafka e só depois tenta gravar a cobrança. O processo cai no meio. A inbox recupera essa cobrança?",
+      answer:
+        "Não. O ack já saiu e o efeito não existe. A inbox não recupera um efeito que nunca foi gravado. A ordem segura grava a cobrança e o identificador, e só então confirma o broker.",
+    },
+    {
+      question:
+        "Dois consumidores consultam a inbox, não encontram a mensagem e os dois inserem. O que faltou na reserva?",
+      answer:
+        "A reserva precisa ser a própria inserção única, com restrição de chave. Consultar e inserir em comandos separados abre corrida.",
+    },
+    {
+      question:
+        "Uma mensagem inválida falha três vezes. Ela deve ser marcada como processada para sair da fila?",
+      answer:
+        "Não. Marcar como processada faz o efeito ausente parecer concluído. A mensagem fica em falha, sem a cobrança.",
+    },
+    {
+      question: "A inbox torna a entrega do Kafka exatamente uma vez?",
+      answer:
+        "Não. O broker continua entregando ao menos uma vez. A inbox impede que a segunda entrega repita o efeito já confirmado.",
+    },
+  ],
 };

@@ -119,7 +119,7 @@ export const withoutOutboxSimulation = parseSimulationDefinition({
   summary:
     "O serviço grava o pedido e depois publica no Kafka. As duas operações não compartilham uma transação.",
   lesson:
-    "Uma falha entre o commit e a publicação deixa o pedido sem evento, e não há uma pendência durável para retomar.",
+    "Gravar e publicar em separado abre duas janelas. O pedido pode ficar sem evento, ou o evento pode ficar sem o pedido. Não há uma pendência durável para retomar.",
   nodes: [...naiveNodes],
   edges: [...naiveEdges],
   tables: [...naiveTables],
@@ -132,6 +132,20 @@ export const withoutOutboxSimulation = parseSimulationDefinition({
       description: "O pedido não chega a ser gravado.",
       lesson: "A falha acontece antes da publicação. O estado permanece vazio.",
       frames: [naiveFrames.receive, naiveFrames.databaseDown],
+    },
+    {
+      id: "message-without-order",
+      name: "Mensagem sem pedido",
+      description: "O Kafka aceita o evento e a transação local falha.",
+      lesson:
+        "Publicar antes do commit deixa um evento sem o pedido. O consumidor pode aplicar um efeito para uma mudança que não existe.",
+      frames: [
+        naiveFrames.receive,
+        naiveFrames.publishAhead,
+        naiveFrames.ackAhead,
+        naiveFrames.transactionRolledBack,
+        naiveFrames.ghostConsume,
+      ],
     },
     {
       id: "kafka-unavailable",

@@ -1,0 +1,26 @@
+---
+description: Identidade do Architecture Lab. Aplica toda melhoria de ensino, UX ou roteiro a todos os módulos publicados e aos próximos.
+alwaysApply: true
+---
+
+# Identidade do laboratório
+
+Trabalho de especialista sênior em design, frontend, UX e backend. O aluno vê um produto só, não uma tela consertada.
+
+## Ao mudar um módulo
+
+1. Aplique a mesma decisão em Outbox, Inbox e em qualquer padrão já publicado.
+2. Registre a decisão em `AGENTS.md` antes de espalhar exceção.
+3. Um apontamento de aluno vira regra de página, não um ajuste local.
+
+## Página de padrão
+
+- "Como ler a simulação" vem antes do laboratório, com os quatro passos da home: cenário, percurso, agora, registros.
+- A troca de etapa destaca o painel Agora com o número da etapa e uma marca persistente. Menos movimento tira a animação.
+- Controles e opções de cenário mostram ponteiro e o mesmo hover.
+- O caminho sem o padrão mostra as duas ordens da operação partida.
+- Exercícios são um conjunto, com resposta individual. Cobrem o que o padrão não garante.
+
+## Precisão
+
+Não afirmar entrega exatamente uma vez. O ack do broker fica fora da transação local. Texto do aluno em português do Brasil. Identificadores em inglês.
