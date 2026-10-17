@@ -1,0 +1,23 @@
+name: Defeito
+description: Comportamento incorreto na simulação ou na interface
+title: "fix: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamento esperado
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: O que aconteceu
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Como reproduzir
+    validations:
+      required: true

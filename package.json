@@ -1,0 +1,26 @@
+{
+  "name": "architecture-lab",
+  "private": true,
+  "packageManager": "pnpm@10.18.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "corepack pnpm --filter @architecture-lab/web dev",
+    "build": "corepack pnpm --filter @architecture-lab/web build",
+    "start": "corepack pnpm --filter @architecture-lab/web start",
+    "typecheck": "corepack pnpm --filter \"./apps/**\" --filter \"./packages/**\" --filter \"./content\" typecheck",
+    "test": "corepack pnpm --filter \"./apps/**\" --filter \"./packages/**\" --filter \"./content\" test",
+    "lint": "corepack pnpm exec biome check .",
+    "format": "corepack pnpm exec biome check --write .",
+    "test:e2e": "corepack pnpm exec playwright test"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@playwright/test": "^1.56.1",
+    "typescript": "^5.9.2"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["@biomejs/biome", "esbuild"]
+  }
+}

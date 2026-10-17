@@ -1,0 +1,17 @@
+name: Funcionalidade
+description: Nova capacidade do laboratório
+title: "feat: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Resultado para o aluno
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critério de aceite
+    validations:
+      required: true

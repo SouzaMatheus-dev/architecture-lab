@@ -1,0 +1,9 @@
+{
+  "slug": "transactional-outbox",
+  "title": "Transactional Outbox",
+  "summary": "Grava a mudança de negócio e a intenção de publicar um evento na mesma transação local.",
+  "category": "Consistência",
+  "complexity": "Intermediário",
+  "status": "available",
+  "language": "pt-BR"
+}
