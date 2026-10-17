@@ -7,7 +7,7 @@ const STEPS = [
   {
     label: "Percurso",
     title: "A ordem dos eventos",
-    text: "A trilha mostra cada etapa. O relógio só muda a velocidade, não o resultado.",
+    text: "A trilha mostra cada etapa, inteira, na mesma tela. O relógio só muda a velocidade, não o resultado.",
   },
   {
     label: "Agora",

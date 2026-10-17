@@ -16,6 +16,7 @@ Trabalho de especialista sênior em design, frontend, UX e backend. O aluno vê 
 ## Página de padrão
 
 - "Como ler a simulação" vem antes do laboratório, com os quatro passos da home: cenário, percurso, agora, registros. O texto de abertura usa a largura da página. Os quatro passos ficam numa faixa abaixo.
+- O percurso mostra a trilha inteira, sem rolagem horizontal. Cada etapa é um botão com o nome. A frase da etapa atual fica numa faixa abaixo da trilha, na largura da página, com uma marca que permanece. O número distingue o que já passou, a etapa atual e o que vem depois.
 - A troca de etapa destaca o painel Agora com o número da etapa e uma marca persistente. Menos movimento tira a animação.
 - A aresta acesa segue o evento da etapa, da origem para o destino, saindo do lado do nó que aponta para o destino. Cada caminho tem o próprio desenho. Um segundo participante de uma corrida é um nó próprio, e o primeiro permanece visível.
 - Controles e opções de cenário mostram ponteiro e o mesmo hover.
