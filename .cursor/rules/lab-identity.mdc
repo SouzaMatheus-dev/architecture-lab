@@ -19,7 +19,8 @@ Trabalho de especialista sênior em design, frontend, UX e backend. O aluno vê 
 - A troca de etapa destaca o painel Agora com o número da etapa e uma marca persistente. Menos movimento tira a animação.
 - Controles e opções de cenário mostram ponteiro e o mesmo hover.
 - O caminho sem o padrão mostra as duas ordens da operação partida.
-- Exercícios são um conjunto, com resposta individual. Cobrem o que o padrão não garante.
+- Exercícios são um conjunto numerado, com resposta individual. Cobrem o que o padrão não garante.
+- Espaço e setas não disparam a simulação com o foco num controle. Catálogo e home ligam todos os padrões. Copiar nomeia o arquivo. O zoom do diagrama está em português.
 
 ## Precisão
 

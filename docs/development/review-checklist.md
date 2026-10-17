@@ -11,6 +11,9 @@
 - A troca de etapa destaca o painel ao lado do diagrama, com número da etapa e marca que permanece sem animação.
 - "Como ler a simulação" aparece antes do laboratório e usa os mesmos quatro passos da home.
 - O caminho sem o padrão mostra as duas ordens da operação partida.
-- Os exercícios cobrem essas duas ordens e o que o padrão não garante.
+- Os exercícios cobrem essas duas ordens e o que o padrão não garante. Cada questão é numerada e abre a própria resposta.
+- Espaço e setas não disparam a simulação quando o foco está num controle.
+- Cartões de padrão, inclusive os planejados, levam à página do módulo. A home lista todos.
+- Copiar nomeia o arquivo. O zoom do diagrama está em português. A página inexistente tem título próprio.
 - `corepack pnpm test`, `corepack pnpm typecheck` e `corepack pnpm lint` passaram.
 - A tela alterada foi percorrida no navegador ou no Playwright.

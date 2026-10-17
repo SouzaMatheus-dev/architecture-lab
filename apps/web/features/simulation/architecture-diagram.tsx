@@ -150,11 +150,18 @@ export function ArchitectureDiagram({
         elementsSelectable={false}
         minZoom={0.35}
         maxZoom={1.35}
+        panActivationKeyCode={null}
         proOptions={{ hideAttribution: false }}
+        ariaLabelConfig={{
+          "controls.ariaLabel": "Zoom do diagrama",
+          "controls.zoomIn.ariaLabel": "Ampliar",
+          "controls.zoomOut.ariaLabel": "Reduzir",
+          "controls.fitView.ariaLabel": "Ajustar à tela",
+        }}
       >
         <FrameFit signature={`${definition.id}:${definition.nodes.length}`} />
         <Background color="#e4d9c8" gap={18} />
-        <Controls showInteractive={false} aria-label="Zoom do diagrama" />
+        <Controls showInteractive={false} />
       </ReactFlow>
     </div>
   );

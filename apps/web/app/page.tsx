@@ -1,12 +1,10 @@
+import { PatternCard } from "@/components/pattern-card";
 import { LabReadingSteps } from "@/features/patterns/lab-reading";
 import { listPatterns } from "@architecture-lab/content";
 import Link from "next/link";
 
 export default function HomePage() {
-  const available = listPatterns().filter((pattern) => pattern.status === "available");
-  const nextPatterns = listPatterns()
-    .filter((pattern) => pattern.status === "planned")
-    .slice(0, 3);
+  const patterns = listPatterns();
 
   return (
     <div className="shell">
@@ -47,26 +45,8 @@ export default function HomePage() {
       <section className="section">
         <h2>Módulos</h2>
         <div className="catalog-grid">
-          {available.map((pattern) => (
-            <Link key={pattern.slug} className="pattern-card" href={`/patterns/${pattern.slug}`}>
-              <div className="meta-row">
-                <span className="chip available">Disponível</span>
-                <span className="chip">{pattern.category}</span>
-                <span className="chip">{pattern.complexity}</span>
-              </div>
-              <h3>{pattern.title}</h3>
-              <p>{pattern.summary}</p>
-            </Link>
-          ))}
-          {nextPatterns.map((pattern) => (
-            <article key={pattern.slug} className="pattern-card planned">
-              <div className="meta-row">
-                <span className="chip planned">Em seguida</span>
-                <span className="chip">{pattern.category}</span>
-              </div>
-              <h3>{pattern.title}</h3>
-              <p>{pattern.summary}</p>
-            </article>
+          {patterns.map((pattern) => (
+            <PatternCard key={pattern.slug} pattern={pattern} heading="h3" />
           ))}
         </div>
       </section>

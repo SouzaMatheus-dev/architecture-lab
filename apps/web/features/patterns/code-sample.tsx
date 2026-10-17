@@ -18,7 +18,12 @@ export function CodeSample({ filename, source }: { filename: string; source: str
     <figure className="code-sample">
       <header>
         <figcaption>{filename}</figcaption>
-        <button type="button" className="button" onClick={() => void copy()}>
+        <button
+          type="button"
+          className="button"
+          aria-label={copied ? `Copiado ${filename}` : `Copiar ${filename}`}
+          onClick={() => void copy()}
+        >
           {copied ? "Copiado" : "Copiar"}
         </button>
       </header>

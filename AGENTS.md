@@ -50,13 +50,16 @@ O MVP é uma aplicação web estática e interativa. Não adicionar autenticaç�
 - Os controles de reprodução são botões com nome acessível. A velocidade fica na mesma linha, com o rótulo alinhado ao centro dos botões.
 - O estado dos componentes existe em texto, além do diagrama.
 - A narrativa da etapa atual usa uma região `aria-live`.
-- O laboratório funciona com teclado: Espaço e setas.
+- O laboratório funciona com teclado: Espaço e setas. O atalho fica inativo com o foco em botão, link, campo ou no resumo de um exercício.
 - Respeitar `prefers-reduced-motion`.
 - O diagrama pode ser ampliado. A lista de estados continua disponível em telas estreitas.
 - O laboratório se lê em quatro passos: cenário, percurso, o que acontece agora e registros.
 - A seção "Como ler a simulação" fica antes do laboratório, em toda página de padrão, com os mesmos quatro passos da home.
 - Cada troca de etapa destaca o painel ao lado do diagrama. O destaque traz o número da etapa e uma marca persistente. A animação some quando o usuário pede menos movimento.
-- Cada padrão publicado tem um conjunto de exercícios. As questões cobrem o que o padrão não garante e as duas ordens da operação partida.
+- Cada padrão publicado tem um conjunto de exercícios. As questões cobrem o que o padrão não garante e as duas ordens da operação partida. Cada questão é numerada e abre a própria resposta.
+- Catálogo e home ligam cada padrão, inclusive o planejado, à própria página. A home mostra a lista inteira. No catálogo, o título da página é seguido pelos títulos dos módulos, sem pular nível.
+- O botão de copiar exemplo inclui o nome do arquivo. O zoom do diagrama fala português: Ampliar, Reduzir e Ajustar à tela.
+- A página inexistente usa o título "Página não encontrada".
 - A marca do cabeçalho e o ícone do site usam o mesmo selo.
 
 ## Comandos oficiais

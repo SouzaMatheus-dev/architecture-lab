@@ -40,7 +40,13 @@ Atue como especialista sênior em design, frontend, UX e backend. Uma melhoria e
 
 ## Exercícios
 
-Pelo menos quatro questões por módulo publicado. Cada uma abre a própria resposta. O conjunto pergunta as duas ordens da operação partida e o que o padrão não garante.
+Pelo menos quatro questões por módulo publicado. Cada uma é numerada e abre a própria resposta. O conjunto pergunta as duas ordens da operação partida e o que o padrão não garante.
+
+## Atalhos e catálogo
+
+- Espaço e setas avançam o laboratório só com o foco fora de botão, link, campo e do resumo do exercício.
+- Catálogo e home ligam todo padrão, inclusive o planejado, à própria página. A home mostra a lista inteira.
+- O catálogo não pula de título. Copiar inclui o arquivo. O zoom do diagrama está em português. A página inexistente tem título próprio.
 
 ## Padrão novo
 
