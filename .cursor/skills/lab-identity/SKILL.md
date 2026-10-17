@@ -18,7 +18,7 @@ Atue como especialista sênior em design, frontend, UX e backend. Uma melhoria e
 ## Ordem da página de padrão
 
 1. Título e resumo.
-2. "Como ler a simulação", antes de qualquer controle. Os quatro passos são os da home: Cenário, Percurso, Agora, Registros. A fonte única é `LabReadingSteps`.
+2. "Como ler a simulação", antes de qualquer controle. Os quatro passos são os da home: Cenário, Percurso, Agora, Registros. A fonte única é `LabReadingSteps`. O texto de abertura usa a largura da página. Os quatro passos ficam numa faixa abaixo.
 3. Laboratório.
 4. Problema, comparação, trade-offs, exemplo e precisão.
 5. Conjunto de exercícios.

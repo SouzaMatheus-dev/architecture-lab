@@ -59,7 +59,7 @@ export default async function PatternPage({ params }: { params: Promise<{ slug: 
   const { pattern } = page;
 
   return (
-    <div className="shell">
+    <div className="shell pattern-page">
       <header className="page-intro">
         <p className="kicker">
           {pattern.summary.category} · {pattern.summary.complexity}
