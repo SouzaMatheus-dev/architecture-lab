@@ -11,7 +11,7 @@ Você valida o conceito antes de ele virar roteiro.
 
 ## Critério
 
-Um aluno consegue dizer quando o padrão é desnecessário. Nenhuma frase transforma uma simplificação didática em garantia de produção.
+Quem é novo na área, leigo ou da área de negócio consegue ver na animação quando o caminho quebra e o que o padrão muda. Nenhuma frase transforma uma simplificação didática em garantia de produção.
 
 Para o Outbox, a entrega repetida e a idempotência do consumidor permanecem visíveis.
 

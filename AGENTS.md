@@ -6,6 +6,8 @@ Regras comuns para agentes e revisores do Architecture Lab. Instruções de pape
 
 Ensinar padrões de arquitetura com simulações reproduzíveis, cenários de falha e exemplos em .NET. O conceito é independente de linguagem. O exemplo concreto não redefine o conceito.
 
+O aluno pode ser novo na área, leigo ou da área de negócio. A animação é a aula: o movimento mostra a causa e o efeito, e o texto nomeia o que a tela já mostrou. Todos os fluxos publicados andam juntos. Uma linha que não acompanha o evento falha o ensino.
+
 O MVP é uma aplicação web estática e interativa. Não adicionar autenticação, banco da plataforma, execução de código enviado pelo usuário, Kafka real ou geração autônoma de conteúdo em produção.
 
 ## Stack
@@ -44,19 +46,26 @@ O MVP é uma aplicação web estática e interativa. Não adicionar autenticaç�
 - Nomear simplificações didáticas, inclusive limites de retry e a escolha entre polling e CDC.
 - O exemplo .NET deve usar a mesma transação local para o pedido e a mensagem. O dispatcher simplificado deve dizer o que falta para produção.
 - No caminho sem o padrão, as duas ordens da operação partida ficam visíveis. No Outbox: pedido sem evento e evento sem pedido. No Inbox: efeito repetido e ack sem efeito.
+- Cada laboratório mostra, no cenário, o problema do caminho sem o padrão e o que o padrão quer melhorar. As duas frases permanecem visíveis. A marca "Em tela" indica qual caminho o diagrama está percorrendo.
 
 ## Interface
 
 - Os controles de reprodução são botões com nome acessível. A velocidade fica na mesma linha, com o rótulo alinhado ao centro dos botões.
 - O estado dos componentes existe em texto, além do diagrama.
 - A narrativa da etapa atual usa uma região `aria-live`.
-- O laboratório funciona com teclado: Espaço e setas.
+- O laboratório funciona com teclado: Espaço e setas. O atalho fica inativo com o foco em botão, link, campo ou no resumo de um exercício.
 - Respeitar `prefers-reduced-motion`.
 - O diagrama pode ser ampliado. A lista de estados continua disponível em telas estreitas.
+- A animação é o principal meio de ensino, em todo fluxo publicado: com o padrão, sem ele e em cada falha.
+- A aresta acesa da etapa segue o evento dessa etapa, da origem para o destino, saindo do lado do nó que aponta para o destino. Outra aresta acesa pode acompanhar um segundo movimento do mesmo passo. Menos movimento tira o tracejado e mantém a aresta acesa.
+- Cada caminho tem o próprio desenho. Um segundo participante de uma corrida é um nó próprio quando a falha anima essa corrida. O primeiro permanece visível.
 - O laboratório se lê em quatro passos: cenário, percurso, o que acontece agora e registros.
 - A seção "Como ler a simulação" fica antes do laboratório, em toda página de padrão, com os mesmos quatro passos da home.
 - Cada troca de etapa destaca o painel ao lado do diagrama. O destaque traz o número da etapa e uma marca persistente. A animação some quando o usuário pede menos movimento.
-- Cada padrão publicado tem um conjunto de exercícios. As questões cobrem o que o padrão não garante e as duas ordens da operação partida.
+- Cada padrão publicado tem um conjunto de exercícios. As questões cobrem o que o padrão não garante e as duas ordens da operação partida. Cada questão é numerada e abre a própria resposta.
+- Catálogo e home ligam cada padrão, inclusive o planejado, à própria página. A home mostra a lista inteira. No catálogo, o título da página é seguido pelos títulos dos módulos, sem pular nível.
+- O botão de copiar exemplo inclui o nome do arquivo. O zoom do diagrama fala português: Ampliar, Reduzir e Ajustar à tela.
+- A página inexistente usa o título "Página não encontrada".
 - A marca do cabeçalho e o ícone do site usam o mesmo selo.
 
 ## Comandos oficiais

@@ -1,6 +1,6 @@
+import { PatternCard } from "@/components/pattern-card";
 import { listPatterns } from "@architecture-lab/content";
 import type { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Catálogo",
@@ -20,41 +20,13 @@ export default function CatalogPage() {
           percorridos. Os demais entram como nova definição, no mesmo motor.
         </p>
       </header>
-      <section className="section">
+      <section className="section" aria-label="Módulos">
         <div className="catalog-grid">
-          {patterns.map((pattern) =>
-            pattern.status === "available" ? (
-              <Link key={pattern.slug} className="pattern-card" href={`/patterns/${pattern.slug}`}>
-                <PatternBody pattern={pattern} />
-              </Link>
-            ) : (
-              <article key={pattern.slug} className="pattern-card planned">
-                <PatternBody pattern={pattern} />
-              </article>
-            ),
-          )}
+          {patterns.map((pattern) => (
+            <PatternCard key={pattern.slug} pattern={pattern} heading="h2" />
+          ))}
         </div>
       </section>
     </div>
-  );
-}
-
-function PatternBody({
-  pattern,
-}: {
-  pattern: ReturnType<typeof listPatterns>[number];
-}) {
-  return (
-    <>
-      <div className="meta-row">
-        <span className="chip">{pattern.category}</span>
-        <span className="chip">{pattern.complexity}</span>
-        <span className={pattern.status === "available" ? "chip available" : "chip planned"}>
-          {pattern.status === "available" ? "Disponível" : "Planejado"}
-        </span>
-      </div>
-      <h3>{pattern.title}</h3>
-      <p>{pattern.summary}</p>
-    </>
   );
 }

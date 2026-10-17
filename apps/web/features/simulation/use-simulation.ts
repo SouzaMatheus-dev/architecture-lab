@@ -14,6 +14,13 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 export const PLAYBACK_STEP_MS = 1600;
 
+const SHORTCUT_LOCK =
+  "button, a, input, textarea, select, summary, label, [contenteditable='true']";
+
+function blocksSimulationShortcut(target: EventTarget | null) {
+  return target instanceof Element && target.closest(SHORTCUT_LOCK) !== null;
+}
+
 export function useSimulation(definition: SimulationDefinition) {
   const [state, setState] = useState<SimulationRunState>(() => createInitialRunState());
   const [definitionId, setDefinitionId] = useState(definition.id);
@@ -51,11 +58,7 @@ export function useSimulation(definition: SimulationDefinition) {
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
-      const target = event.target;
-      if (
-        target instanceof HTMLElement &&
-        (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable)
-      ) {
+      if (blocksSimulationShortcut(event.target)) {
         return;
       }
       if (event.key === " ") {

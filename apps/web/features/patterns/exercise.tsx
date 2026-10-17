@@ -1,53 +1,33 @@
-"use client";
-
-import { useState } from "react";
-
 export function Exercise({
   items,
 }: {
   items: readonly { question: string; answer: string }[];
 }) {
-  const [open, setOpen] = useState<ReadonlySet<number>>(() => new Set());
-
   return (
-    <section className="exercise article-section" aria-label="Exercícios">
-      <h2>Exercícios</h2>
-      <p>Responda com o que a simulação mostrou. Abra uma resposta de cada vez.</p>
+    <section className="exercise article-section" aria-labelledby="exercicios">
+      <h2 id="exercicios">Exercícios</h2>
+      <p className="exercise-lead">
+        Responda com o que a simulação mostrou. Cada questão abre a própria resposta.
+      </p>
       <ol className="exercise-list">
-        {items.map((item, index) => {
-          const shown = open.has(index);
-          const number = index + 1;
-          const answerId = `exercise-answer-${number}`;
-          return (
-            <li key={item.question}>
-              <p>{item.question}</p>
-              {shown ? (
-                <p className="answer" id={answerId}>
-                  {item.answer}
-                </p>
-              ) : null}
-              <button
-                type="button"
-                className="button secondary"
-                aria-expanded={shown}
-                aria-controls={shown ? answerId : undefined}
-                onClick={() => {
-                  setOpen((current) => {
-                    const next = new Set(current);
-                    if (next.has(index)) {
-                      next.delete(index);
-                    } else {
-                      next.add(index);
-                    }
-                    return next;
-                  });
-                }}
-              >
-                {shown ? `Ocultar resposta ${number}` : `Mostrar resposta ${number}`}
-              </button>
-            </li>
-          );
-        })}
+        {items.map((item, index) => (
+          <li key={item.question}>
+            <details className="exercise-item">
+              <summary>
+                <span className="exercise-index">{index + 1}</span>
+                <span className="exercise-question">{item.question}</span>
+                <span className="exercise-action">
+                  <span className="exercise-action-closed">Ver resposta</span>
+                  <span className="exercise-action-open">Ocultar</span>
+                </span>
+              </summary>
+              <div className="answer">
+                <p className="answer-label">Resposta</p>
+                <p>{item.answer}</p>
+              </div>
+            </details>
+          </li>
+        ))}
       </ol>
     </section>
   );

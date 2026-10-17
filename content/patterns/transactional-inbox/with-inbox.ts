@@ -218,7 +218,7 @@ const crashed = step({
     consumer: { status: "failure", detail: "interrompido" },
     database: { status: "success" },
   }),
-  activeEdgeIds: [],
+  activeEdgeIds: ["deliver"],
   tables: saved,
   notes: ["O efeito sobrevive na transação local, não na memória do processo."],
 });
@@ -364,7 +364,7 @@ const rivalLoses = step({
     database: { status: "success" },
     rival: { status: "failure", detail: "chave única" },
   }),
-  activeEdgeIds: ["race"],
+  activeEdgeIds: ["reject"],
   tables: {
     charges: [charge("chg-1042", "Registrada")],
     inbox: [inbox("Processada · consumer-a")],

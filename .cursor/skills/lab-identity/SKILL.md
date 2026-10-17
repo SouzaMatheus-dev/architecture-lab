@@ -1,6 +1,6 @@
 ---
 name: lab-identity
-description: Aplica a identidade do Architecture Lab a todo módulo publicado e a padrões novos. Use ao alterar laboratório, página de padrão, exercício, roteiro de falha, UX, design ou quando um apontamento de aluno pedir uma melhoria.
+description: Aplica a identidade do Architecture Lab a todo módulo publicado e a padrões novos. Use ao alterar laboratório, página de padrão, exercício, roteiro de falha, UX, design ou quando um apontamento de aluno pedir uma melhoria. Para o movimento do diagrama, siga também a skill lab-animation.
 ---
 
 # Identidade do Architecture Lab
@@ -23,6 +23,10 @@ Atue como especialista sênior em design, frontend, UX e backend. Uma melhoria e
 4. Problema, comparação, trade-offs, exemplo e precisão.
 5. Conjunto de exercícios.
 
+## Animação
+
+A animação é a aula para quem é novo na área, leigo ou da área de negócio. O movimento mostra a causa e o efeito. O texto nomeia o que a tela já mostrou. Siga `.cursor/skills/lab-animation/SKILL.md` ao criar ou alterar qualquer fluxo.
+
 ## Laboratório
 
 - Chips de cenário e falha usam ponteiro e o mesmo hover dos botões.
@@ -35,12 +39,20 @@ Atue como especialista sênior em design, frontend, UX e backend. Uma melhoria e
 
 - Uma falha substitui o roteiro inteiro e reinicia.
 - Sem o padrão, as duas ordens da operação partida existem. Outbox: pedido sem evento e evento sem pedido. Inbox: efeito repetido e ack sem efeito.
+- O cenário mostra o problema e o que queremos melhorar nos dois caminhos. "Em tela" marca o caminho do diagrama.
+- A aresta acesa segue o evento da etapa, da origem para o destino, saindo do lado do nó que aponta para o destino. Cada caminho tem o próprio desenho. Um segundo participante de uma corrida é um nó próprio, e o primeiro permanece visível.
 - Não escrever que Outbox ou Inbox garantem entrega exatamente uma vez.
 - O ack do broker fica fora da transação local.
 
 ## Exercícios
 
-Pelo menos quatro questões por módulo publicado. Cada uma abre a própria resposta. O conjunto pergunta as duas ordens da operação partida e o que o padrão não garante.
+Pelo menos quatro questões por módulo publicado. Cada uma é numerada e abre a própria resposta. O conjunto pergunta as duas ordens da operação partida e o que o padrão não garante.
+
+## Atalhos e catálogo
+
+- Espaço e setas avançam o laboratório só com o foco fora de botão, link, campo e do resumo do exercício.
+- Catálogo e home ligam todo padrão, inclusive o planejado, à própria página. A home mostra a lista inteira.
+- O catálogo não pula de título. Copiar inclui o arquivo. O zoom do diagrama está em português. A página inexistente tem título próprio.
 
 ## Padrão novo
 
