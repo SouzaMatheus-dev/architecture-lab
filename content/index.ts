@@ -36,7 +36,7 @@ export interface PatternWriteup {
     files: readonly { filename: string; source: string }[];
   };
   accuracy: { id: string; title: string; items: readonly string[] };
-  exercise: { question: string; answer: string };
+  exercise: readonly { question: string; answer: string }[];
 }
 
 export interface LabMode {
@@ -71,7 +71,7 @@ const available: Record<string, AvailablePattern> = {
         label: "Sem Outbox",
         description: "O serviço publica no Kafka depois de gravar o pedido.",
         limitNote:
-          "Esta é uma simulação no navegador. Sem a intenção registrada, uma falha entre o commit e a publicação deixa o pedido sem evento.",
+          "Esta é uma simulação no navegador. Sem a intenção registrada, o pedido pode ficar sem evento, ou o evento pode ficar sem pedido.",
         definition: withoutOutboxSimulation,
       },
     ],
@@ -93,7 +93,7 @@ const available: Record<string, AvailablePattern> = {
         label: "Sem Inbox",
         description: "O consumidor grava a cobrança sem lembrar a mensagem.",
         limitNote:
-          "Esta é uma simulação no navegador. Sem o identificador gravado com o efeito, uma reentrega pode repetir a cobrança.",
+          "Esta é uma simulação no navegador. Sem o identificador gravado com o efeito, uma reentrega pode repetir a cobrança, e um ack adiantado pode perder o efeito.",
         definition: withoutInboxSimulation,
       },
     ],

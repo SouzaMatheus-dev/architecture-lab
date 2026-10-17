@@ -366,6 +366,23 @@ h1 {
   margin: 1.1rem 0 2rem;
 }
 
+.briefing {
+  padding: 0.4rem 0 0.2rem;
+}
+
+.briefing h2 {
+  margin: 0 0 0.7rem;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+}
+
+.briefing > p {
+  max-width: 46rem;
+}
+
+.briefing .grid-4 {
+  margin-top: 1rem;
+}
+
 .bench-label {
   display: flex;
   align-items: center;
@@ -491,9 +508,39 @@ h1 {
 
 .story {
   min-width: 0;
-  padding: 0.15rem 0.15rem 0.2rem 0.35rem;
+  padding: 0.15rem 0.15rem 0.2rem 0.85rem;
   position: sticky;
   top: 5.4rem;
+  border-left: 4px solid var(--copper);
+}
+
+.story-beat {
+  border-radius: 0.85rem;
+  animation: story-arrive 0.85s ease;
+}
+
+.story-step {
+  margin: 0 0 0.35rem;
+  color: var(--copper-deep);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.78rem;
+  font-weight: 620;
+}
+
+@keyframes story-arrive {
+  0% {
+    background: var(--copper-soft);
+    transform: translateX(0);
+  }
+
+  16% {
+    transform: translateX(0.4rem);
+  }
+
+  100% {
+    background: transparent;
+    transform: none;
+  }
 }
 
 .story h2 {
@@ -550,7 +597,7 @@ progress {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.55rem 0.9rem;
+  gap: 0.55rem 0.85rem;
   padding-bottom: 0.15rem;
   border-bottom: 1px solid var(--line);
 }
@@ -573,8 +620,9 @@ progress {
 
 .controls .button,
 .speed-row .button {
-  min-height: 2.4rem;
-  padding-inline: 0.8rem;
+  height: 2.5rem;
+  min-height: 2.5rem;
+  padding: 0 0.9rem;
   background: var(--paper);
   color: var(--ink);
   border-color: var(--line);
@@ -609,15 +657,28 @@ a.button:hover:not(.secondary) {
   background: #fff;
 }
 
-.speed-row legend,
 .key-hint {
   color: var(--muted);
   font-size: 0.85rem;
 }
 
-.speed-row legend {
-  padding: 0 0.2rem 0 0;
-  align-self: center;
+.speed-row {
+  align-items: center;
+  margin-left: 0.15rem;
+  padding-left: 0.85rem;
+  border-left: 1px solid var(--line);
+}
+
+.speed-label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.speed-row .choice span {
+  height: 2.5rem;
+  min-height: 2.5rem;
+  padding: 0 0.72rem;
 }
 
 .diagram-canvas {
@@ -803,6 +864,18 @@ a.button:hover:not(.secondary) {
 .timeline-item[aria-current="step"] {
   background: var(--copper-soft);
   border-color: var(--copper);
+  box-shadow: inset 0 0 0 1px var(--copper);
+  animation: step-arrive 0.7s ease;
+}
+
+@keyframes step-arrive {
+  0% {
+    transform: translateY(0.2rem);
+  }
+
+  100% {
+    transform: none;
+  }
 }
 
 .timeline-item small {
@@ -908,6 +981,23 @@ th {
 .exercise form,
 .exercise .answer {
   margin-top: 0.8rem;
+}
+
+.exercise-list {
+  display: grid;
+  gap: 0.15rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.exercise-list > li {
+  padding: 0.95rem 0 0.2rem;
+  border-top: 1px solid var(--line);
+}
+
+.exercise-list > li > p:first-child {
+  margin-top: 0;
 }
 
 .site-footer {
@@ -1021,6 +1111,12 @@ th {
     order: -1;
   }
 
+  .speed-row {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: 0;
+  }
+
   .diagram-canvas {
     height: 460px;
   }
@@ -1040,8 +1136,10 @@ th {
 
   .choice span,
   .timeline-item,
-  .button {
+  .button,
+  .story-beat {
     transition: none;
+    animation: none;
   }
 
   .lab-node[data-status="processing"] .pip {

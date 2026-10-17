@@ -213,7 +213,8 @@ function ModeLab({
             </button>
           </fieldset>
           <fieldset className="choice-row speed-row" aria-describedby="speed-cadence">
-            <legend>Velocidade</legend>
+            <legend className="sr-only">Velocidade</legend>
+            <span className="speed-label">Velocidade</span>
             {SPEED_PRESETS.map((speed) => (
               <label key={speed} className="choice">
                 <input
@@ -257,21 +258,28 @@ function ModeLab({
             <p className="bench-label">
               <span>3</span> Agora
             </p>
-            <p className="kicker">{finished ? "Concluída" : definition.title}</p>
-            <h2>{snapshot.frame.title}</h2>
-            <p className="narrative" aria-live="polite">
-              {snapshot.frame.narrative}
-            </p>
-            {snapshot.frame.notes.length > 0 ? (
-              <ul className="notes">
-                {snapshot.frame.notes.map((note) => (
-                  <li key={note}>{note}</li>
-                ))}
-              </ul>
-            ) : null}
-            <div className="lesson">
-              <strong>O que este cenário mostra</strong>
-              {snapshot.lesson}
+            <div key={railKey} className="story-beat">
+              <p className="story-step">
+                {snapshot.stepIndex < 0
+                  ? "Etapa atual, ainda não iniciada"
+                  : `Etapa atual, ${stepNumber} de ${snapshot.stepCount}`}
+              </p>
+              <p className="kicker">{finished ? "Concluída" : definition.title}</p>
+              <h2>{snapshot.frame.title}</h2>
+              <p className="narrative" aria-live="polite">
+                {snapshot.frame.narrative}
+              </p>
+              {snapshot.frame.notes.length > 0 ? (
+                <ul className="notes">
+                  {snapshot.frame.notes.map((note) => (
+                    <li key={note}>{note}</li>
+                  ))}
+                </ul>
+              ) : null}
+              <div className="lesson">
+                <strong>O que este cenário mostra</strong>
+                {snapshot.lesson}
+              </div>
             </div>
           </aside>
         </div>

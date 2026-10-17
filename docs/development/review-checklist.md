@@ -8,5 +8,9 @@
 - O dispatcher simplificado declara o que falta.
 - Controles têm nome acessível e a lista textual de componentes acompanha o diagrama.
 - A bancada continua legível na ordem cenário, percurso, agora e registros.
+- A troca de etapa destaca o painel ao lado do diagrama, com número da etapa e marca que permanece sem animação.
+- "Como ler a simulação" aparece antes do laboratório e usa os mesmos quatro passos da home.
+- O caminho sem o padrão mostra as duas ordens da operação partida.
+- Os exercícios cobrem essas duas ordens e o que o padrão não garante.
 - `corepack pnpm test`, `corepack pnpm typecheck` e `corepack pnpm lint` passaram.
 - A tela alterada foi percorrida no navegador ou no Playwright.

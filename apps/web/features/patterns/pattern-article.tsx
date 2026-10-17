@@ -21,13 +21,6 @@ export function PatternArticle({ pattern }: { pattern: AvailablePattern }) {
         ))}
       </section>
 
-      <section className="article-section" id={article.flow.id}>
-        <h2>{article.flow.title}</h2>
-        {article.flow.paragraphs.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
-      </section>
-
       <section className="article-section" id={article.tradeoffs.id}>
         <h2>{article.tradeoffs.title}</h2>
         <div className="split">
@@ -92,7 +85,7 @@ export function PatternArticle({ pattern }: { pattern: AvailablePattern }) {
         </ul>
       </section>
 
-      <Exercise question={article.exercise.question} answer={article.exercise.answer} />
+      <Exercise items={article.exercise} />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { PatternArticle } from "@/features/patterns/pattern-article";
+import { SimulationBriefing } from "@/features/patterns/simulation-briefing";
 import { SimulationLab } from "@/features/simulation/simulation-lab";
 import { getPatternPage, listPatterns } from "@architecture-lab/content";
 import type { Metadata } from "next";
@@ -66,6 +67,7 @@ export default async function PatternPage({ params }: { params: Promise<{ slug: 
         <h1>{pattern.summary.title}</h1>
         <p className="lede">{pattern.summary.summary}</p>
       </header>
+      <SimulationBriefing flow={pattern.article.flow} />
       <SimulationLab modes={pattern.modes} />
       <PatternArticle pattern={pattern} />
     </div>

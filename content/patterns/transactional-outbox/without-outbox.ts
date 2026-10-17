@@ -197,6 +197,101 @@ const publishFailed = step({
   tables: data({ orders: [order("Confirmado")] }),
 });
 
+const publishAhead = step({
+  id: "publish-ahead",
+  title: "Publicação antecipada",
+  narrative:
+    "O serviço publica OrderCreated antes de confirmar o pedido. A mensagem já segue para o broker e Orders ainda está vazia.",
+  event: {
+    id: "publish-ahead",
+    type: "broker.publish",
+    description: "Order Service produz OrderCreated antes do commit.",
+    source: "order-service",
+    target: "kafka",
+    outcome: "pending",
+  },
+  components: stage(ids, {
+    client: { status: "waiting", detail: "Aguardando resposta" },
+    "order-service": { status: "processing", detail: "Publicando primeiro" },
+    kafka: { status: "processing", detail: "Recebendo evento" },
+  }),
+  activeEdgeIds: ["publish"],
+  tables: blank(),
+  notes: ["A publicação não espera a transação local."],
+});
+
+const ackAhead = step({
+  id: "ack-ahead",
+  title: "Broker confirma",
+  narrative: "O Kafka aceita o evento. O pedido ainda não foi confirmado.",
+  event: {
+    id: "ack-ahead",
+    type: "broker.ack",
+    description: "Kafka confirma a publicação feita antes do commit.",
+    source: "kafka",
+    target: "order-service",
+    outcome: "success",
+  },
+  components: stage(ids, {
+    client: { status: "waiting", detail: "Aguardando o banco" },
+    "order-service": { status: "processing", detail: "Evento aceito" },
+    kafka: { status: "success", detail: "Evento aceito" },
+  }),
+  activeEdgeIds: ["publish"],
+  tables: blank(),
+  notes: ["Um rollback local não apaga essa mensagem."],
+});
+
+const transactionRolledBack = step({
+  id: "transaction-rolled-back",
+  title: "Transação revertida",
+  narrative:
+    "A gravação do pedido falha. Orders continua vazia, mas OrderCreated já foi aceito pelo broker.",
+  event: {
+    id: "transaction-rolled-back",
+    type: "db.commit",
+    description: "A transação local falha depois da publicação.",
+    source: "order-service",
+    target: "database",
+    outcome: "failure",
+  },
+  components: stage(ids, {
+    client: { status: "failure", detail: "Erro após publicar" },
+    "order-service": { status: "failure", detail: "Pedido não confirmado" },
+    database: { status: "failure", detail: "Transação revertida" },
+    kafka: { status: "success", detail: "Evento aceito" },
+  }),
+  activeEdgeIds: ["write"],
+  tables: blank(),
+});
+
+const ghostConsume = step({
+  id: "ghost-consume",
+  title: "Consumo sem pedido",
+  narrative:
+    "O consumidor aplica o evento. Não há linha em Orders correspondente. O efeito segue sem a mudança de negócio.",
+  event: {
+    id: "ghost-consume",
+    type: "consumer.handle",
+    description: "Consumidor aplica OrderCreated de um pedido que não existe.",
+    source: "kafka",
+    target: "consumer",
+    outcome: "success",
+  },
+  components: stage(ids, {
+    client: { status: "failure", detail: "Erro após publicar" },
+    "order-service": { status: "failure", detail: "Pedido não confirmado" },
+    database: { status: "failure", detail: "Nada gravado" },
+    kafka: { status: "success", detail: "Evento entregue" },
+    consumer: { status: "success", detail: "Efeito sem pedido" },
+  }),
+  activeEdgeIds: ["deliver"],
+  tables: data({
+    consumerLog: [delivery("delivery-orphan", "Aplicado sem pedido")],
+  }),
+  notes: ["O rollback da transação local não alcança o broker."],
+});
+
 const inconsistent = step({
   id: "inconsistent",
   title: "Estado inconsistente",
@@ -237,4 +332,8 @@ export const naiveFrames = {
   databaseDown,
   publishFailed,
   inconsistent,
+  publishAhead,
+  ackAhead,
+  transactionRolledBack,
+  ghostConsume,
 };
