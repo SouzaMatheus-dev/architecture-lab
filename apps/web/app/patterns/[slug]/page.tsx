@@ -47,8 +47,8 @@ export default async function PatternPage({ params }: { params: Promise<{ slug: 
           <h1>{page.summary.title}</h1>
           <p className="lede">{page.summary.summary}</p>
           <p className="lede">
-            Este módulo ainda não tem simulação. O Outbox é a prova do motor; o próximo padrão entra
-            quando puder reutilizar os mesmos contratos.
+            Este módulo ainda não tem simulação. Outbox e Inbox mostram o contrato do motor; o
+            próximo padrão entra como nova definição e novo conteúdo.
           </p>
         </header>
       </div>

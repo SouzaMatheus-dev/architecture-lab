@@ -23,6 +23,15 @@ export const patternCatalog: readonly PatternSummary[] = [
     language: "pt-BR",
   },
   {
+    slug: "transactional-inbox",
+    title: "Transactional Inbox",
+    summary: "Grava o efeito de negócio e o identificador da mensagem na mesma transação local.",
+    category: "Consistência",
+    complexity: "Intermediário",
+    status: "available",
+    language: "pt-BR",
+  },
+  {
     slug: "saga",
     title: "Saga",
     summary:

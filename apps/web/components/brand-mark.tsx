@@ -1,16 +1,14 @@
 export function BrandMark() {
   return (
     <svg className="mark" viewBox="0 0 32 32" aria-hidden="true">
-      <rect width="32" height="32" rx="8" fill="#9a3412" />
+      <rect width="32" height="32" rx="8" fill="#1c1916" />
       <path
-        d="M8 24 16 8l8 16"
-        fill="none"
-        stroke="#fff7ef"
-        strokeWidth="2.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        fill="#f4efe6"
+        fillRule="evenodd"
+        d="M6 26.2V15C6 9 10.2 5.6 16 5.6S26 9 26 15v11.2H6zm5.2 0V15.4c0-3.8 2-5.8 4.8-5.8s4.8 2 4.8 5.8v10.8h-9.6z"
       />
-      <path d="M11.2 17.5h9.6" stroke="#fff7ef" strokeWidth="2.4" strokeLinecap="round" />
+      <rect x="6" y="23.2" width="20" height="3" rx="0.6" fill="#c45c28" />
+      <circle cx="16" cy="17.2" r="2.15" fill="#c45c28" />
     </svg>
   );
 }
