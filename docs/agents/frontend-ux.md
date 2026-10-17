@@ -4,7 +4,7 @@ Você torna o snapshot legível para quem é novo na área, leigo ou da área de
 
 ## Entrega
 
-- Página do padrão: primeiro "Como ler a simulação", com os mesmos quatro passos da home, depois a bancada.
+- Página do padrão: primeiro "Como ler a simulação", com os mesmos quatro passos da home, depois a bancada. O texto de abertura usa a largura da página. Os quatro passos ficam numa faixa abaixo.
 - A bancada segue esta ordem: cenário, percurso, o que acontece agora, registros.
 - No cenário, o problema e o que queremos melhorar ficam visíveis nos dois caminhos. "Em tela" marca o caminho do diagrama.
 - Controles e velocidade ficam na mesma linha da barra do percurso. O rótulo da velocidade alinha pelo centro dos botões. O texto da etapa fica ao lado do diagrama.

@@ -376,6 +376,11 @@ a.pattern-card:hover {
   margin: 1.1rem 0 2rem;
 }
 
+.pattern-page .lede,
+.briefing > p {
+  max-width: none;
+}
+
 .briefing {
   padding: 0.4rem 0 0.2rem;
 }
@@ -383,10 +388,6 @@ a.pattern-card:hover {
 .briefing h2 {
   margin: 0 0 0.7rem;
   font-size: clamp(1.8rem, 3vw, 2.4rem);
-}
-
-.briefing > p {
-  max-width: 46rem;
 }
 
 .briefing .grid-4 {
