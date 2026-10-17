@@ -3,7 +3,7 @@
 import type { LabMode } from "@architecture-lab/content";
 import { SPEED_PRESETS, resolveFrames } from "@architecture-lab/simulation-engine";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PLAYBACK_STEP_MS, useSimulation } from "./use-simulation";
 
 const ArchitectureDiagram = dynamic(
@@ -63,6 +63,24 @@ function ModeLab({
   const stepNumber = snapshot.stepIndex + 1;
   const running = snapshot.status === "running";
   const finished = snapshot.status === "completed";
+
+  const railKey = `${snapshot.activeFailureId ?? "happy"}:${snapshot.stepIndex}`;
+
+  useEffect(() => {
+    if (railKey.length === 0) {
+      return;
+    }
+    const current = document.querySelector(".lab-stage .timeline-item[aria-current='step']");
+    const rail = current?.closest(".step-rail");
+    if (!(current instanceof HTMLElement) || !(rail instanceof HTMLElement)) {
+      return;
+    }
+    const railBox = rail.getBoundingClientRect();
+    const itemBox = current.getBoundingClientRect();
+    if (itemBox.left < railBox.left || itemBox.right > railBox.right) {
+      rail.scrollLeft += itemBox.left - railBox.left - 8;
+    }
+  }, [railKey]);
 
   return (
     <section className="lab" aria-label="Simulação do padrão">
