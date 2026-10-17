@@ -30,9 +30,10 @@ test("compara o caminho sem Outbox", async ({ page }) => {
   await page.goto("/patterns/transactional-outbox");
   await page.locator("label.choice", { hasText: "Sem Outbox" }).click();
   await expect(page.getByText("publica direto no Kafka")).toBeVisible();
-  await expect(page.getByText("O pedido pode ficar sem evento")).toBeVisible();
-  await expect(page.getByText("O que queremos melhorar")).toBeVisible();
-  await expect(page.getByRole("article").filter({ hasText: "Problema" })).toHaveAttribute(
+  const contrast = page.locator(".contrast");
+  await expect(contrast.getByText("O pedido pode ficar sem evento")).toBeVisible();
+  await expect(contrast.getByText("O que queremos melhorar")).toBeVisible();
+  await expect(contrast.getByRole("article").filter({ hasText: "Problema" })).toHaveAttribute(
     "aria-current",
     "true",
   );
