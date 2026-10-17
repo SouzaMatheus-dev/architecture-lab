@@ -60,6 +60,7 @@ O MVP é uma aplicação web estática e interativa. Não adicionar autenticaç�
 - A aresta acesa da etapa segue o evento dessa etapa, da origem para o destino, saindo do lado do nó que aponta para o destino. Outra aresta acesa pode acompanhar um segundo movimento do mesmo passo. Menos movimento tira o tracejado e mantém a aresta acesa.
 - Cada caminho tem o próprio desenho. Um segundo participante de uma corrida é um nó próprio quando a falha anima essa corrida. O primeiro permanece visível.
 - O laboratório se lê em quatro passos: cenário, percurso, o que acontece agora e registros.
+- O percurso mostra a trilha inteira, sem rolagem horizontal. Cada etapa é um botão com o nome. A frase da etapa atual fica numa faixa abaixo da trilha, na largura da página, com uma marca que permanece. O número distingue o que já passou, a etapa atual e o que vem depois.
 - A seção "Como ler a simulação" fica antes do laboratório, em toda página de padrão, com os mesmos quatro passos da home. O texto de abertura usa a largura da página. Os quatro passos ficam numa faixa abaixo.
 - Cada troca de etapa destaca o painel ao lado do diagrama. O destaque traz o número da etapa e uma marca persistente. A animação some quando o usuário pede menos movimento.
 - Cada padrão publicado tem um conjunto de exercícios. As questões cobrem o que o padrão não garante e as duas ordens da operação partida. Cada questão é numerada e abre a própria resposta.

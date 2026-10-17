@@ -3,7 +3,7 @@
 import type { LabContrast, LabMode } from "@architecture-lab/content";
 import { SPEED_PRESETS, resolveFrames } from "@architecture-lab/simulation-engine";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PLAYBACK_STEP_MS, useSimulation } from "./use-simulation";
 
 const ArchitectureDiagram = dynamic(
@@ -74,22 +74,16 @@ function ModeLab({
   const finished = snapshot.status === "completed";
 
   const railKey = `${snapshot.activeFailureId ?? "happy"}:${snapshot.stepIndex}`;
-
-  useEffect(() => {
-    if (railKey.length === 0) {
-      return;
-    }
-    const current = document.querySelector(".lab-stage .timeline-item[aria-current='step']");
-    const rail = current?.closest(".step-rail");
-    if (!(current instanceof HTMLElement) || !(rail instanceof HTMLElement)) {
-      return;
-    }
-    const railBox = rail.getBoundingClientRect();
-    const itemBox = current.getBoundingClientRect();
-    if (itemBox.left < railBox.left || itemBox.right > railBox.right) {
-      rail.scrollLeft += itemBox.left - railBox.left - 8;
-    }
-  }, [railKey]);
+  const stops = [
+    { index: -1, id: "start", title: "Início", detail: definition.initial.title },
+    ...script.map((frame, index) => ({
+      index,
+      id: frame.id,
+      title: frame.title,
+      detail: frame.event.description,
+    })),
+  ];
+  const currentStop = stops.find((stop) => stop.index === snapshot.stepIndex) ?? stops[0];
 
   return (
     <section className="lab" aria-label="Simulação do padrão">
@@ -171,31 +165,30 @@ function ModeLab({
         <section className="timeline" aria-label="Linha do tempo">
           <h2 className="sr-only">Eventos</h2>
           <ol className="step-rail">
-            <li>
-              <button
-                type="button"
-                className="timeline-item"
-                aria-current={snapshot.stepIndex < 0 ? "step" : undefined}
-                onClick={() => dispatch({ type: "goTo", stepIndex: -1 })}
-              >
-                <strong>Início</strong>
-                <small>{definition.initial.title}</small>
-              </button>
-            </li>
-            {script.map((frame, index) => (
-              <li key={frame.id}>
-                <button
-                  type="button"
-                  className="timeline-item"
-                  aria-current={index === snapshot.stepIndex ? "step" : undefined}
-                  onClick={() => dispatch({ type: "goTo", stepIndex: index })}
-                >
-                  <strong>{frame.title}</strong>
-                  <small>{frame.event.description}</small>
-                </button>
-              </li>
-            ))}
+            {stops.map((stop) => {
+              const state =
+                stop.index === snapshot.stepIndex
+                  ? "current"
+                  : stop.index < snapshot.stepIndex
+                    ? "done"
+                    : "upcoming";
+              return (
+                <li key={stop.id}>
+                  <button
+                    type="button"
+                    className="timeline-item"
+                    data-state={state}
+                    aria-current={state === "current" ? "step" : undefined}
+                    onClick={() => dispatch({ type: "goTo", stepIndex: stop.index })}
+                  >
+                    <span className="step-index">{stop.index + 1}</span>
+                    <strong>{stop.title}</strong>
+                  </button>
+                </li>
+              );
+            })}
           </ol>
+          <p className="step-caption">{currentStop?.detail}</p>
         </section>
 
         <div className="transport">

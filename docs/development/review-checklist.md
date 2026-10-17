@@ -7,7 +7,7 @@
 - O exemplo .NET usa uma transação para pedido e mensagem.
 - O dispatcher simplificado declara o que falta.
 - Controles têm nome acessível e a lista textual de componentes acompanha o diagrama.
-- A bancada continua legível na ordem cenário, percurso, agora e registros.
+- A bancada continua legível na ordem cenário, percurso, agora e registros. O percurso mostra a trilha inteira, sem rolagem horizontal, e a frase da etapa atual fica numa faixa abaixo da trilha.
 - A troca de etapa destaca o painel ao lado do diagrama, com número da etapa e marca que permanece sem animação.
 - A animação ensina quem é novo na área, leigo ou da área de negócio. A aresta acesa segue o evento da etapa, da origem para o destino, em todos os fluxos do módulo. Uma volta, o caminho sem o padrão e a corrida foram vistos no navegador.
 - "Como ler a simulação" aparece antes do laboratório e usa os mesmos quatro passos da home. O texto de abertura usa a largura da página. Os quatro passos ficam numa faixa abaixo.

@@ -29,6 +29,7 @@ A animação é a aula para quem é novo na área, leigo ou da área de negócio
 
 ## Laboratório
 
+- O percurso mostra a trilha inteira, sem rolagem horizontal. Cada etapa é um botão com o nome. A frase da etapa atual fica numa faixa abaixo da trilha, na largura da página, com uma marca que permanece. O número distingue o que já passou, a etapa atual e o que vem depois.
 - Chips de cenário e falha usam ponteiro e o mesmo hover dos botões.
 - Controles e velocidade ficam na mesma linha. O rótulo alinha pelo centro dos botões.
 - Cada troca de etapa destaca o painel Agora: número da etapa, marca persistente e animação curta. `prefers-reduced-motion` remove a animação e mantém a marca.
