@@ -432,12 +432,15 @@ h1 {
 
 .choice {
   position: relative;
+  cursor: pointer;
 }
 
 .choice input {
   position: absolute;
   opacity: 0;
   inset: 0;
+  margin: 0;
+  cursor: pointer;
 }
 
 .choice span {
@@ -448,9 +451,19 @@ h1 {
   border-radius: 999px;
   border: 1px solid var(--line);
   background: var(--paper-raised);
+  cursor: pointer;
+  transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
 }
 
-.choice input:checked + span {
+.choice:hover span,
+.choice:focus-within span {
+  border-color: var(--ink);
+  background: #fff;
+}
+
+.choice input:checked + span,
+.choice:hover input:checked + span,
+.choice:focus-within input:checked + span {
   border-color: var(--copper);
   background: var(--copper-soft);
   color: var(--copper-deep);
@@ -577,6 +590,23 @@ progress {
   background: var(--copper);
   color: white;
   border-color: var(--copper);
+}
+
+.controls .button:hover:not(:disabled) {
+  border-color: var(--ink);
+  background: #fff;
+}
+
+.controls .button.primary:hover:not(:disabled),
+a.button:hover:not(.secondary) {
+  background: var(--copper-deep);
+  border-color: var(--copper-deep);
+  color: white;
+}
+
+.button.secondary:hover {
+  border-color: var(--ink);
+  background: #fff;
 }
 
 .speed-row legend,
@@ -752,6 +782,11 @@ progress {
   background: var(--paper);
   padding: 0.45rem 0.65rem 0.5rem 2rem;
   cursor: pointer;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.timeline-item:hover {
+  border-color: var(--ink);
 }
 
 .timeline-item::before {
@@ -1001,6 +1036,12 @@ th {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .choice span,
+  .timeline-item,
+  .button {
+    transition: none;
   }
 
   .lab-node[data-status="processing"] .pip {
