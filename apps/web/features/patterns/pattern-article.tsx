@@ -3,7 +3,7 @@ import { CodeSample } from "./code-sample";
 import { Exercise } from "./exercise";
 
 export function PatternArticle({ pattern }: { pattern: AvailablePattern }) {
-  const { article, examples } = pattern;
+  const { article } = pattern;
 
   return (
     <div className="article">
@@ -77,13 +77,10 @@ export function PatternArticle({ pattern }: { pattern: AvailablePattern }) {
 
       <section className="article-section" id="exemplo-dotnet">
         <h2>Exemplo em .NET</h2>
-        <p>
-          Os dois registros usam o mesmo contexto e a mesma transação do banco. O dispatcher abaixo
-          é intencionalmente incompleto: falta a reserva atômica, o limite de tentativas e o
-          tratamento da falha entre o ack e a atualização da Outbox.
-        </p>
-        <CodeSample filename="CreateOrder.cs" source={examples.createOrder} />
-        <CodeSample filename="OutboxDispatcher.cs" source={examples.dispatcher} />
+        <p>{article.example.intro}</p>
+        {article.example.files.map((file) => (
+          <CodeSample key={file.filename} filename={file.filename} source={file.source} />
+        ))}
       </section>
 
       <section className="article-section" id={article.accuracy.id}>

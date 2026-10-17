@@ -52,6 +52,8 @@ O MVP é uma aplicação web estática e interativa. Não adicionar autenticaç�
 - O laboratório funciona com teclado: Espaço e setas.
 - Respeitar `prefers-reduced-motion`.
 - O diagrama pode ser ampliado. A lista de estados continua disponível em telas estreitas.
+- O laboratório se lê em quatro passos: cenário, percurso, o que acontece agora e registros.
+- A marca do cabeçalho e o ícone do site usam o mesmo selo.
 
 ## Comandos oficiais
 
@@ -75,7 +77,13 @@ Uma tarefa só termina com evidência:
 - para fluxo de tela, verificação no navegador ou Playwright;
 - descrição do que mudou e de como foi validado.
 
-Não misturar dependência nova, workflow e conteúdo didático no mesmo pull request sem necessidade. Não colocar segredo no repositório. Não fazer deploy de produção a partir do agente.
+Não misturar dependência nova, workflow e conteúdo didático no mesmo pull request sem necessidade. Não colocar segredo no repositório.
+
+## Publicação
+
+Toda mudança entra em `main` por pull request. A branch principal não recebe commit direto.
+
+Cada publicação gera uma GitHub Release com tag `vX.Y.Z`. As notas dizem o que o aluno passa a ver e apontam o site. A Vercel publica a partir de `main` depois do merge. Não fazer deploy de produção por fora desse fluxo.
 
 ## Conclusão
 

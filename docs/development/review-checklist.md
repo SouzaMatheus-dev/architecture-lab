@@ -7,5 +7,6 @@
 - O exemplo .NET usa uma transação para pedido e mensagem.
 - O dispatcher simplificado declara o que falta.
 - Controles têm nome acessível e a lista textual de componentes acompanha o diagrama.
+- A bancada continua legível na ordem cenário, percurso, agora e registros.
 - `corepack pnpm test`, `corepack pnpm typecheck` e `corepack pnpm lint` passaram.
 - A tela alterada foi percorrida no navegador ou no Playwright.

@@ -16,8 +16,8 @@ export default function CatalogPage() {
         <p className="kicker">Catálogo</p>
         <h1>Padrões com um modelo só.</h1>
         <p className="lede">
-          Cada módulo separa o problema, o fluxo, a falha e o exemplo. O Outbox já pode ser
-          percorrido. Os demais entram quando o mesmo motor conseguir recebê-los.
+          Cada módulo separa o problema, o fluxo, a falha e o exemplo. Outbox e Inbox já podem ser
+          percorridos. Os demais entram como nova definição, no mesmo motor.
         </p>
       </header>
       <section className="section">
@@ -49,7 +49,7 @@ function PatternBody({
       <div className="meta-row">
         <span className="chip">{pattern.category}</span>
         <span className="chip">{pattern.complexity}</span>
-        <span className="chip planned">
+        <span className={pattern.status === "available" ? "chip available" : "chip planned"}>
           {pattern.status === "available" ? "Disponível" : "Planejado"}
         </span>
       </div>

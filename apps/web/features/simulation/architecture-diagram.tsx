@@ -22,6 +22,13 @@ const POSITIONS: Record<string, { x: number; y: number }> = {
   worker: { x: 450, y: 180 },
   kafka: { x: 680, y: 180 },
   consumer: { x: 910, y: 180 },
+  "transactional-inbox:kafka": { x: 0, y: 40 },
+  "transactional-inbox:consumer": { x: 280, y: 40 },
+  "transactional-inbox:database": { x: 560, y: 20 },
+  "transactional-inbox:rival": { x: 280, y: 220 },
+  "direct-consume:kafka": { x: 0, y: 80 },
+  "direct-consume:consumer": { x: 280, y: 80 },
+  "direct-consume:database": { x: 560, y: 80 },
 };
 
 const STATUS_LABEL: Record<string, string> = {
@@ -96,10 +103,11 @@ export function ArchitectureDiagram({
     return {
       id: node.id,
       type: "lab",
-      position: POSITIONS[node.id] ?? {
-        x: (index % 3) * 260,
-        y: Math.floor(index / 3) * 180,
-      },
+      position: POSITIONS[`${definition.id}:${node.id}`] ??
+        POSITIONS[node.id] ?? {
+          x: (index % 3) * 260,
+          y: Math.floor(index / 3) * 180,
+        },
       data: {
         label: node.label,
         caption: node.caption,

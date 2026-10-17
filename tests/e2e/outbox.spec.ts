@@ -15,6 +15,13 @@ test("abre o Outbox, avança uma etapa e aplica a falha do Kafka", async ({ page
   await expect(page.getByRole("button", { name: "Pausar" })).toBeEnabled();
 });
 
+test("abre o Inbox e mostra que a queda antes do ack não duplica a cobrança", async ({ page }) => {
+  await page.goto("/patterns/transactional-inbox");
+  await expect(page.getByRole("heading", { level: 1, name: "Transactional Inbox" })).toBeVisible();
+  await page.locator("label.choice", { hasText: "Queda antes do ack" }).click();
+  await expect(page.getByText("não duplica a cobrança")).toBeVisible();
+});
+
 test("compara o caminho sem Outbox", async ({ page }) => {
   await page.goto("/patterns/transactional-outbox");
   await page.locator("label.choice", { hasText: "Sem Outbox" }).click();

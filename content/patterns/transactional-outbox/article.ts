@@ -97,6 +97,14 @@ export const transactionalOutboxArticle = {
       "Ainda não existe um consumidor idempotente nem uma política para mensagens problemáticas.",
     ],
   },
+  example: {
+    intro:
+      "Os dois registros usam o mesmo contexto e a mesma transação do banco. O dispatcher abaixo é intencionalmente incompleto: falta a reserva atômica, o limite de tentativas e o tratamento da falha entre o ack e a atualização da Outbox.",
+    files: [
+      { filename: "CreateOrder.cs", source: createOrderSource },
+      { filename: "OutboxDispatcher.cs", source: dispatcherSource },
+    ],
+  },
   accuracy: {
     id: "precisao",
     title: "O que o Outbox não garante",
