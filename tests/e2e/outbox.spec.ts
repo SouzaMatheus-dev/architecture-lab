@@ -11,7 +11,7 @@ test("abre o Outbox, avança uma etapa e aplica a falha do Kafka", async ({ page
   await expect(page.getByText("Pronta para iniciar")).toBeVisible();
   await expect(page.getByText("O pedido continua confirmado.")).toBeVisible();
 
-  await page.getByRole("button", { name: "Iniciar" }).click();
+  await page.getByRole("button", { name: "Iniciar", exact: true }).click();
   await expect(page.getByRole("button", { name: "Pausar" })).toBeEnabled();
 });
 
