@@ -20,16 +20,30 @@ const practices = [
 const tools = [
   [
     "McpSqlServer",
-    "SQL Server em leitura: mapeamento, auditoria e consulta, com autenticação Windows.",
+    ".NET 8",
+    "SQL Server: mapeamento, auditoria e consulta somente leitura, com autenticação Windows.",
   ],
   [
     "McpKubernetes",
-    "Kubernetes em leitura, pela API nativa, Rancher ou Dashboard. Sem apply, delete ou exec.",
+    ".NET 8",
+    "Kubernetes somente leitura, via API nativa, Rancher ou Dashboard. Sem apply, delete ou exec.",
   ],
   [
     "McpNotebookLM",
+    ".NET 8",
     "Cria notebooks e envia documentação ao NotebookLM com a sessão Google de quem usa.",
   ],
+  [
+    "McpGuardWatch",
+    ".NET 10",
+    "Logs, métricas, Kubernetes, APM, banco, SIEM e saúde do GuardWatch, somente leitura, com login LDAP.",
+  ],
+  [
+    "McpApplicationInsights",
+    ".NET 8",
+    "Application Insights somente leitura. Assinatura e componente ficam no login de quem usa. O pacote não guarda segredo.",
+  ],
+  ["McpKafka", ".NET 8", "Kafka UI somente leitura: tópicos e mensagens. Sem produce nem delete."],
 ] as const;
 
 export default function AboutPage() {
@@ -39,7 +53,7 @@ export default function AboutPage() {
         <p className="kicker">Autoria</p>
         <h1>Matheus Souza</h1>
         <p className="credentials">
-          Engenharia de Computação · Pós em Liderança Técnica · MBA em Arquitetura
+          Engenharia da Computação · Pós em Liderança Técnica · MBA em Arquitetura
         </p>
         <p className="lede">
           Arquitetura de sistemas distribuídos, qualidade da entrega e liderança técnica. O
@@ -65,7 +79,7 @@ export default function AboutPage() {
           <span>anos em sistemas, entrega e times</span>
         </article>
         <article>
-          <strong>3</strong>
+          <strong>6</strong>
           <span>pacotes abertos na comunidade</span>
         </article>
         <article>
@@ -124,13 +138,13 @@ export default function AboutPage() {
       <section className="section">
         <h2>Ferramentas abertas</h2>
         <p className="lede">
-          Servidores MCP em .NET 8, publicados no NuGet. Leitura onde o risco pede limite. A
-          credencial fica no ambiente de quem usa.
+          Servidores MCP publicados no NuGet, em .NET 8 e .NET 10. Leitura onde o risco pede limite.
+          A credencial fica no ambiente de quem usa.
         </p>
         <div className="grid-3 tool-grid">
-          {tools.map(([title, detail]) => (
+          {tools.map(([title, runtime, detail]) => (
             <article key={title} className="panel">
-              <p className="kicker">NuGet · .NET 8</p>
+              <p className="kicker">NuGet · {runtime}</p>
               <h3>{title}</h3>
               <p>{detail}</p>
             </article>
