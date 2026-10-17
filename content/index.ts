@@ -39,10 +39,15 @@ export interface PatternWriteup {
   exercise: readonly { question: string; answer: string }[];
 }
 
+export interface LabContrast {
+  problem: string;
+  aim: string;
+}
+
 export interface LabMode {
   id: string;
   label: string;
-  description: string;
+  role: "pattern" | "baseline";
   limitNote: string;
   definition: SimulationDefinition;
 }
@@ -50,6 +55,7 @@ export interface LabMode {
 export interface AvailablePattern {
   summary: PatternSummary;
   article: PatternWriteup;
+  contrast: LabContrast;
   modes: LabMode[];
 }
 
@@ -57,11 +63,16 @@ const available: Record<string, AvailablePattern> = {
   "transactional-outbox": {
     summary: requiredSummary("transactional-outbox"),
     article: transactionalOutboxArticle,
+    contrast: {
+      problem:
+        "Gravar o pedido e publicar o evento são operações separadas. O pedido pode ficar sem evento, ou o evento pode ficar sem o pedido.",
+      aim: "Confirmar o pedido e a intenção de publicar na mesma transação. A publicação continua depois, e o ack do broker segue fora dela.",
+    },
     modes: [
       {
         id: "with-outbox",
         label: "Com Outbox",
-        description: "Pedido e mensagem entram na mesma transação local.",
+        role: "pattern",
         limitNote:
           "Esta é uma simulação no navegador. O Outbox registra a intenção de publicar. Ele não garante entrega exatamente uma vez, e o consumidor precisa tolerar uma mensagem repetida.",
         definition: withOutboxSimulation,
@@ -69,7 +80,7 @@ const available: Record<string, AvailablePattern> = {
       {
         id: "without-outbox",
         label: "Sem Outbox",
-        description: "O serviço publica no Kafka depois de gravar o pedido.",
+        role: "baseline",
         limitNote:
           "Esta é uma simulação no navegador. Sem a intenção registrada, o pedido pode ficar sem evento, ou o evento pode ficar sem pedido.",
         definition: withoutOutboxSimulation,
@@ -79,11 +90,16 @@ const available: Record<string, AvailablePattern> = {
   "transactional-inbox": {
     summary: requiredSummary("transactional-inbox"),
     article: transactionalInboxArticle,
+    contrast: {
+      problem:
+        "A cobrança não lembra a mensagem. Uma reentrega repete o efeito, e um ack antes da gravação pode perder a cobrança.",
+      aim: "Gravar a cobrança e o identificador na mesma transação, e confirmar o broker só depois. A entrega repetida continua possível.",
+    },
     modes: [
       {
         id: "with-inbox",
         label: "Com Inbox",
-        description: "Cobrança e identificador da mensagem entram na mesma transação local.",
+        role: "pattern",
         limitNote:
           "Esta é uma simulação no navegador. A Inbox grava o identificador da mensagem junto com o efeito. Ela não torna o broker exatamente uma vez.",
         definition: withInboxSimulation,
@@ -91,7 +107,7 @@ const available: Record<string, AvailablePattern> = {
       {
         id: "without-inbox",
         label: "Sem Inbox",
-        description: "O consumidor grava a cobrança sem lembrar a mensagem.",
+        role: "baseline",
         limitNote:
           "Esta é uma simulação no navegador. Sem o identificador gravado com o efeito, uma reentrega pode repetir a cobrança, e um ack adiantado pode perder o efeito.",
         definition: withoutInboxSimulation,

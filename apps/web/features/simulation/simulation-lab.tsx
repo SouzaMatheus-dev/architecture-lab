@@ -1,6 +1,6 @@
 "use client";
 
-import type { LabMode } from "@architecture-lab/content";
+import type { LabContrast, LabMode } from "@architecture-lab/content";
 import { SPEED_PRESETS, resolveFrames } from "@architecture-lab/simulation-engine";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
@@ -31,7 +31,13 @@ const STATUS_LABEL: Record<string, string> = {
   waiting: "aguardando",
 };
 
-export function SimulationLab({ modes }: { modes: LabMode[] }) {
+export function SimulationLab({
+  modes,
+  contrast,
+}: {
+  modes: LabMode[];
+  contrast: LabContrast;
+}) {
   const [modeId, setModeId] = useState(modes[0]?.id ?? "");
   const mode = modes.find((item) => item.id === modeId) ?? modes[0];
   if (!mode) {
@@ -43,6 +49,7 @@ export function SimulationLab({ modes }: { modes: LabMode[] }) {
       key={mode.id}
       mode={mode}
       modes={modes}
+      contrast={contrast}
       onModeChange={(nextModeId) => setModeId(nextModeId)}
     />
   );
@@ -51,10 +58,12 @@ export function SimulationLab({ modes }: { modes: LabMode[] }) {
 function ModeLab({
   mode,
   modes,
+  contrast,
   onModeChange,
 }: {
   mode: LabMode;
   modes: LabMode[];
+  contrast: LabContrast;
   onModeChange: (modeId: string) => void;
 }) {
   const { snapshot, dispatch } = useSimulation(mode.definition);
@@ -101,6 +110,22 @@ function ModeLab({
               <span>{item.label}</span>
             </label>
           ))}
+        </div>
+        <div className="contrast">
+          <article aria-current={mode.role === "baseline" ? "true" : undefined}>
+            <p className="contrast-label">
+              Problema
+              {mode.role === "baseline" ? <span className="chip">Em tela</span> : null}
+            </p>
+            <p>{contrast.problem}</p>
+          </article>
+          <article aria-current={mode.role === "pattern" ? "true" : undefined}>
+            <p className="contrast-label">
+              O que queremos melhorar
+              {mode.role === "pattern" ? <span className="chip">Em tela</span> : null}
+            </p>
+            <p>{contrast.aim}</p>
+          </article>
         </div>
         <div className="choice-row" role="radiogroup" aria-label="Simular falha">
           <p>Falha</p>

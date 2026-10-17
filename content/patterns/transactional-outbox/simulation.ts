@@ -76,6 +76,7 @@ export const withOutboxSimulation = parseSimulationDefinition({
         outboxFrames.poll,
         outboxFrames.publish,
         outboxFrames.ack,
+        outboxFrames.firstCopy,
         outboxFrames.crashedBeforeMark,
         outboxFrames.republish,
         outboxFrames.duplicateIgnored,

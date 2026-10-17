@@ -132,7 +132,7 @@ const crashed = step({
     consumer: { status: "failure", detail: "interrompido" },
     database: { status: "success" },
   }),
-  activeEdgeIds: [],
+  activeEdgeIds: ["deliver"],
   tables: {
     charges: [charge("chg-1042", "Registrada")],
     delivery: [delivery("Ainda não")],
@@ -208,7 +208,7 @@ const lost = step({
     consumer: { status: "failure", detail: "interrompido" },
     database: { status: "failure", detail: "vazio" },
   }),
-  activeEdgeIds: [],
+  activeEdgeIds: ["write"],
   tables: {
     charges: [],
     delivery: [delivery("Confirmado")],

@@ -11,6 +11,7 @@ export const withEdges = [
   { id: "deliver", source: "kafka", target: "consumer", label: "OrderCreated" },
   { id: "write", source: "consumer", target: "database", label: "transação" },
   { id: "race", source: "kafka", target: "rival", label: "mesma mensagem" },
+  { id: "reject", source: "rival", target: "database", label: "chave" },
 ] as const satisfies readonly DiagramEdge[];
 
 export const withTables = [

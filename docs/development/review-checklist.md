@@ -9,8 +9,10 @@
 - Controles têm nome acessível e a lista textual de componentes acompanha o diagrama.
 - A bancada continua legível na ordem cenário, percurso, agora e registros.
 - A troca de etapa destaca o painel ao lado do diagrama, com número da etapa e marca que permanece sem animação.
+- A animação ensina quem é novo na área, leigo ou da área de negócio. A aresta acesa segue o evento da etapa, da origem para o destino, em todos os fluxos do módulo. Uma volta, o caminho sem o padrão e a corrida foram vistos no navegador.
 - "Como ler a simulação" aparece antes do laboratório e usa os mesmos quatro passos da home.
 - O caminho sem o padrão mostra as duas ordens da operação partida.
+- O cenário mostra o problema e o que queremos melhorar, com a marca do caminho que está em tela.
 - Os exercícios cobrem essas duas ordens e o que o padrão não garante. Cada questão é numerada e abre a própria resposta.
 - Espaço e setas não disparam a simulação quando o foco está num controle.
 - Cartões de padrão, inclusive os planejados, levam à página do módulo. A home lista todos.

@@ -11,3 +11,5 @@ Você procura divergência entre o roteiro, o texto e a tela.
 ## Critério
 
 Uma aprovação aponta evidência. Cobertura percentual não substitui o invariante do domínio, como a preservação da Outbox quando o Kafka falha.
+
+A evidência de tela inclui a animação: uma volta, o caminho sem o padrão e a falha que anima uma corrida. O tracejado anda da origem para o destino nos laboratórios publicados.

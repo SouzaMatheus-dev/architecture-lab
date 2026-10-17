@@ -68,7 +68,7 @@ export default async function PatternPage({ params }: { params: Promise<{ slug: 
         <p className="lede">{pattern.summary.summary}</p>
       </header>
       <SimulationBriefing flow={pattern.article.flow} />
-      <SimulationLab modes={pattern.modes} />
+      <SimulationLab modes={pattern.modes} contrast={pattern.contrast} />
       <PatternArticle pattern={pattern} />
     </div>
   );

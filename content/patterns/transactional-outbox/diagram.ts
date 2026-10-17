@@ -5,6 +5,7 @@ export const withNodes = [
   { id: "order-service", label: "Order Service", caption: "API" },
   { id: "database", label: "Banco de dados", caption: "Transação local" },
   { id: "worker", label: "Outbox Worker", caption: "Publicação" },
+  { id: "worker-b", label: "Outro worker", caption: "Corrida" },
   { id: "kafka", label: "Kafka", caption: "Broker" },
   { id: "consumer", label: "Consumidor", caption: "Idempotente" },
 ] as const satisfies readonly DiagramNode[];
@@ -13,6 +14,7 @@ export const withEdges = [
   { id: "request", source: "client", target: "order-service", label: "HTTP" },
   { id: "write", source: "order-service", target: "database", label: "transação" },
   { id: "poll", source: "database", target: "worker", label: "pendências" },
+  { id: "poll-b", source: "database", target: "worker-b", label: "pendências" },
   { id: "publish", source: "worker", target: "kafka", label: "OrderCreated" },
   { id: "deliver", source: "kafka", target: "consumer", label: "entrega" },
 ] as const satisfies readonly DiagramEdge[];

@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Identidade do laboratório
 
-Trabalho de especialista sênior em design, frontend, UX e backend. O aluno vê um produto só, não uma tela consertada.
+Trabalho de especialista sênior em design, frontend, UX e backend. O aluno vê um produto só, não uma tela consertada. O aluno pode ser novo na área, leigo ou da área de negócio. A animação é a aula: o movimento mostra a causa e o efeito, e o texto nomeia o que a tela já mostrou.
 
 ## Ao mudar um módulo
 
@@ -17,8 +17,10 @@ Trabalho de especialista sênior em design, frontend, UX e backend. O aluno vê 
 
 - "Como ler a simulação" vem antes do laboratório, com os quatro passos da home: cenário, percurso, agora, registros.
 - A troca de etapa destaca o painel Agora com o número da etapa e uma marca persistente. Menos movimento tira a animação.
+- A aresta acesa segue o evento da etapa, da origem para o destino, saindo do lado do nó que aponta para o destino. Cada caminho tem o próprio desenho. Um segundo participante de uma corrida é um nó próprio, e o primeiro permanece visível.
 - Controles e opções de cenário mostram ponteiro e o mesmo hover.
 - O caminho sem o padrão mostra as duas ordens da operação partida.
+- O cenário mostra o problema e o que queremos melhorar. "Em tela" marca o caminho do diagrama.
 - Exercícios são um conjunto numerado, com resposta individual. Cobrem o que o padrão não garante.
 - Espaço e setas não disparam a simulação com o foco num controle. Catálogo e home ligam todos os padrões. Copiar nomeia o arquivo. O zoom do diagrama está em português.
 

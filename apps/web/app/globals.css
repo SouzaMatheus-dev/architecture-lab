@@ -457,6 +457,43 @@ a.pattern-card:hover {
   flex: 0 0 6.2rem;
 }
 
+.contrast {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.contrast article {
+  margin: 0;
+  padding: 0.85rem 1rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--paper);
+}
+
+.contrast article[aria-current="true"] {
+  border-color: var(--copper);
+  background: var(--copper-soft);
+  box-shadow: inset 4px 0 0 var(--copper);
+}
+
+.contrast-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0 0 0.35rem;
+  color: var(--copper-deep);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contrast article p:last-child {
+  margin: 0;
+}
+
 .choice {
   position: relative;
   cursor: pointer;
@@ -751,6 +788,11 @@ a.button:hover:not(.secondary) {
   height: 8px;
   background: #cfc4b2;
   border: 0;
+}
+
+.lab-node .react-flow__handle[data-handlepos="top"],
+.lab-node .react-flow__handle[data-handlepos="bottom"] {
+  opacity: 0;
 }
 
 .lab-node[data-status="processing"] {
@@ -1223,6 +1265,10 @@ th {
 
   .diagram-canvas {
     height: 460px;
+  }
+
+  .contrast {
+    grid-template-columns: 1fr;
   }
 
   .exercise-item summary {

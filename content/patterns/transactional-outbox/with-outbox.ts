@@ -418,7 +418,7 @@ const recoveredMark = step({
     kafka: { status: "success", detail: "Evento aceito" },
     consumer: { status: "success", detail: "Efeito aplicado" },
   }),
-  activeEdgeIds: ["deliver"],
+  activeEdgeIds: ["poll", "deliver"],
   tables: data({
     orders: [order("Confirmado")],
     outbox: [message("Processed", "2")],
@@ -478,6 +478,35 @@ const workerRestart = step({
   }),
 });
 
+const firstCopy = step({
+  id: "first-copy",
+  title: "Primeira cópia aplicada",
+  narrative:
+    "O consumidor aplica OrderCreated. A Outbox continua Pending: o worker ainda não marcou a mensagem.",
+  event: {
+    id: "first-copy",
+    type: "consumer.handle",
+    description: "Consumidor aplica a primeira cópia.",
+    source: "kafka",
+    target: "consumer",
+    outcome: "success",
+  },
+  components: stage(ids, {
+    client: { status: "success", detail: "201 Created" },
+    "order-service": { status: "success", detail: "Pedido aceito" },
+    database: { status: "waiting", detail: "Outbox ainda Pending" },
+    worker: { status: "processing", detail: "Ack recebido" },
+    kafka: { status: "success", detail: "Evento entregue" },
+    consumer: { status: "success", detail: "Primeira cópia aplicada" },
+  }),
+  activeEdgeIds: ["deliver"],
+  tables: data({
+    orders: [order("Confirmado")],
+    outbox: [message("Pending", "1")],
+    consumerLog: [delivery("delivery-1", "Aplicado")],
+  }),
+});
+
 const crashedBeforeMark = step({
   id: "crashed-before-mark",
   title: "Ack sem atualizar a Outbox",
@@ -499,7 +528,7 @@ const crashedBeforeMark = step({
     kafka: { status: "success", detail: "Evento aceito" },
     consumer: { status: "success", detail: "Primeira cópia aplicada" },
   }),
-  activeEdgeIds: ["publish"],
+  activeEdgeIds: ["poll"],
   tables: data({
     orders: [order("Confirmado")],
     outbox: [message("Pending", "1")],
@@ -663,16 +692,17 @@ const rivalMisses = step({
     type: "outbox.poll",
     description: "Worker B lê a Outbox e não recebe a mensagem reservada.",
     source: "database",
-    target: "worker",
+    target: "worker-b",
     outcome: "success",
   },
   components: stage(ids, {
     client: { status: "success", detail: "201 Created" },
     "order-service": { status: "success", detail: "Pedido aceito" },
     database: { status: "success", detail: "Nada livre para B" },
-    worker: { status: "processing", detail: "Worker B sem mensagem" },
+    worker: { status: "processing", detail: "Worker A" },
+    "worker-b": { status: "failure", detail: "Sem mensagem" },
   }),
-  activeEdgeIds: ["poll"],
+  activeEdgeIds: ["poll-b"],
   tables: data({
     orders: [order("Confirmado")],
     outbox: [message("Processing · worker-a", "1")],
@@ -726,7 +756,7 @@ const claimedDone = step({
     kafka: { status: "success", detail: "Uma cópia" },
     consumer: { status: "success", detail: "Efeito aplicado" },
   }),
-  activeEdgeIds: ["deliver"],
+  activeEdgeIds: ["poll", "deliver"],
   tables: data({
     orders: [order("Confirmado")],
     outbox: [message("Processed", "1")],
@@ -757,6 +787,7 @@ export const outboxFrames = {
   recoveredMark,
   workerCrashed,
   workerRestart,
+  firstCopy,
   crashedBeforeMark,
   republish,
   duplicateIgnored,

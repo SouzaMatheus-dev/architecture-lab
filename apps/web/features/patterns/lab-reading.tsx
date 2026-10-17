@@ -2,7 +2,7 @@ const STEPS = [
   {
     label: "Cenário",
     title: "Desenho e falha",
-    text: "Com o padrão ou sem ele. Uma falha troca o roteiro inteiro e recomeça do início.",
+    text: "Com o padrão ou sem ele. A escolha mostra o problema e o que queremos melhorar. Uma falha troca o roteiro inteiro.",
   },
   {
     label: "Percurso",
