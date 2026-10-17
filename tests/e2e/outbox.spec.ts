@@ -7,7 +7,7 @@ test("abre o Outbox, avança uma etapa e aplica a falha do Kafka", async ({ page
   await page.getByRole("button", { name: "Próxima etapa" }).click();
   await expect(page.getByText("Etapa 1 de")).toBeVisible();
 
-  await page.getByRole("radio", { name: "Kafka indisponível" }).check();
+  await page.locator("label.choice", { hasText: "Kafka indisponível" }).click();
   await expect(page.getByText("Pronta para iniciar")).toBeVisible();
   await expect(page.getByText("O pedido continua confirmado.")).toBeVisible();
 
@@ -17,6 +17,6 @@ test("abre o Outbox, avança uma etapa e aplica a falha do Kafka", async ({ page
 
 test("compara o caminho sem Outbox", async ({ page }) => {
   await page.goto("/patterns/transactional-outbox");
-  await page.getByRole("radio", { name: "Sem Outbox" }).check();
+  await page.locator("label.choice", { hasText: "Sem Outbox" }).click();
   await expect(page.getByText("publica direto no Kafka")).toBeVisible();
 });
