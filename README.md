@@ -31,7 +31,7 @@ O conceito é independente de linguagem. O exemplo concreto não redefine o conc
 | --- | --- | --- |
 | [Transactional Outbox](https://architecture-lab-gamma.vercel.app/patterns/transactional-outbox) | Consistência | Disponível |
 | [Transactional Inbox](https://architecture-lab-gamma.vercel.app/patterns/transactional-inbox) | Consistência | Disponível |
-| Saga | Consistência | Planejado |
+| [Saga](https://architecture-lab-gamma.vercel.app/patterns/saga) | Consistência | Disponível |
 | CQRS | Modelo | Planejado |
 | Event Sourcing | Modelo | Planejado |
 | Circuit Breaker | Resiliência | Planejado |
@@ -39,7 +39,7 @@ O conceito é independente de linguagem. O exemplo concreto não redefine o conc
 | Cache-Aside | Dados | Planejado |
 | API Gateway | Borda | Planejado |
 
-No Outbox, o pedido e a intenção de publicar compartilham uma transação local. Na Inbox, o efeito e o identificador da mensagem fazem o mesmo. O ack do broker fica fora dessas transações. Nenhum dos dois produz entrega exatamente uma vez.
+No Outbox, o pedido e a intenção de publicar compartilham uma transação local. Na Inbox, o efeito e o identificador da mensagem fazem o mesmo. Na Saga, cada passo tem a própria transação, e a compensação é outro passo. O ack do broker fica fora das transações do Outbox e da Inbox. Nenhum dos três produz conclusão exatamente uma vez.
 
 ## Como estudar
 
@@ -87,7 +87,7 @@ A aplicação abre em `http://localhost:3000`. O catálogo fica em `/patterns`.
 
 O site público está em [architecture-lab-gamma.vercel.app](https://architecture-lab-gamma.vercel.app). Na Vercel, o diretório raiz da aplicação é `apps/web`. O passo a passo está em `docs/development/vercel.md`.
 
-Mudanças entram em `main` por pull request. Cada publicação gera uma [GitHub Release](https://github.com/SouzaMatheus-dev/architecture-lab/releases). A versão atual do produto é `0.2.7`.
+Mudanças entram em `main` por pull request. Cada publicação gera uma [GitHub Release](https://github.com/SouzaMatheus-dev/architecture-lab/releases). A versão atual do produto é `0.3.0`.
 
 Defina `NEXT_PUBLIC_SITE_URL` com a URL pública para metadados e sitemap.
 

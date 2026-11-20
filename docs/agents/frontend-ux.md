@@ -4,14 +4,14 @@ Você torna o snapshot legível para quem é novo na área, leigo ou da área de
 
 ## Entrega
 
-- Página do padrão: primeiro "Como ler a simulação", com os mesmos quatro passos da home, depois a bancada. O texto de abertura usa a largura da página. Os quatro passos ficam numa faixa abaixo.
+- Página do padrão: primeiro "Como ler a simulação", com os mesmos quatro passos da home, depois a bancada. A página planejada também abre com esses quatro passos e diz que a simulação ainda não existe. O texto de abertura usa a largura da página. Os quatro passos ficam numa faixa abaixo.
 - A bancada segue esta ordem: cenário, percurso, o que acontece agora, registros.
 - No cenário, o problema e o que queremos melhorar ficam visíveis nos dois caminhos. "Em tela" marca o caminho do diagrama.
 - O percurso mostra a trilha inteira, sem rolagem horizontal. Cada etapa é um botão com o nome. A frase da etapa atual fica numa faixa abaixo da trilha, na largura da página, com uma marca que permanece. O número distingue o que já passou, a etapa atual e o que vem depois.
 - Controles e velocidade ficam na mesma linha da barra do percurso. O rótulo da velocidade alinha pelo centro dos botões. O texto da etapa fica ao lado do diagrama.
 - Estados perceptíveis sem depender só da cor.
 - Teclado, região ao vivo e layout utilizável em tela estreita. Espaço e setas não roubam botão, link, campo nem o resumo de um exercício.
-- Todos os fluxos andam juntos. A aresta acesa segue o evento, da origem para o destino, saindo do lado do nó que aponta para o destino. Menos movimento tira o tracejado e mantém a aresta acesa. Cada caminho tem o próprio desenho. Um segundo participante de uma corrida é um nó próprio, e o primeiro permanece visível.
+- Todos os fluxos andam juntos. A aresta acesa segue o evento, da origem para o destino, saindo do lado do nó que aponta para o destino. Menos movimento tira o tracejado e mantém a aresta acesa. Cada caminho tem o próprio desenho, e a coordenada de cada nó fica no conteúdo desse caminho. O componente do diagrama não cita o slug do padrão. Um segundo participante de uma corrida é um nó próprio, e o primeiro permanece visível.
 - Cada troca de etapa destaca o painel ao lado do diagrama, com número da etapa e marca persistente. A mesma bancada vale para todo laboratório.
 - Os exercícios são um conjunto. Cada questão é numerada e abre a própria resposta. Elas cobrem o que o padrão não garante.
 - Catálogo e home levam a cada padrão, inclusive o planejado. A home mostra a lista inteira. O catálogo não pula nível de título.

@@ -253,7 +253,11 @@ function ModeLab({
 
         <div className="workbench">
           <div className="canvas-card">
-            <ArchitectureDiagram definition={definition} frame={snapshot.frame} />
+            <ArchitectureDiagram
+              definition={definition}
+              frame={snapshot.frame}
+              layout={mode.layout}
+            />
             <div className="component-list">
               <ul aria-label="Estado dos componentes">
                 {snapshot.frame.components.map((component) => {

@@ -79,7 +79,30 @@ test("catálogo e home levam aos módulos planejados", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 2, name: "Saga" })).toBeVisible();
   await page.getByRole("link", { name: /Saga/ }).click();
   await expect(page.getByRole("heading", { level: 1, name: "Saga" })).toBeVisible();
+  await expect(page.getByRole("region", { name: "Simulação do padrão" })).toBeVisible();
+
+  await page.goto("/patterns/retry");
+  await expect(page.getByRole("heading", { level: 1, name: "Retry" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "Como ler a simulação" })).toBeVisible();
   await expect(page.getByText("Este módulo ainda não tem simulação.")).toBeVisible();
+});
+
+test("abre a Saga, avança uma etapa e compensa a reserva recusada", async ({ page }) => {
+  await page.goto("/patterns/saga");
+  await expect(page.getByRole("heading", { level: 1, name: "Saga" })).toBeVisible();
+  await page.locator("label.choice", { hasText: "Sem Saga" }).click();
+  const contrast = page.locator(".contrast");
+  await expect(contrast.getByText("efeito sem o processo")).toBeVisible();
+  await expect(contrast.getByRole("article").filter({ hasText: "Problema" })).toHaveAttribute(
+    "aria-current",
+    "true",
+  );
+  await page.locator("label.choice", { hasText: "Com Saga" }).click();
+  await page.locator("label.choice", { hasText: "Estoque recusa" }).click();
+  await expect(page.getByText("Pronta para iniciar")).toBeVisible();
+  await page.getByRole("button", { name: "Próxima etapa" }).click();
+  await expect(page.getByText("Etapa 1 de")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Copiar OrderSaga.cs" })).toBeVisible();
 });
 
 test("a página inexistente tem título próprio", async ({ page }) => {

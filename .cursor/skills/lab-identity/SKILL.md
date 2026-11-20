@@ -39,11 +39,11 @@ A animação é a aula para quem é novo na área, leigo ou da área de negócio
 ## Roteiro
 
 - Uma falha substitui o roteiro inteiro e reinicia.
-- Sem o padrão, as duas ordens da operação partida existem. Outbox: pedido sem evento e evento sem pedido. Inbox: efeito repetido e ack sem efeito.
+- Sem o padrão, as duas ordens da operação partida existem. Outbox: pedido sem evento e evento sem pedido. Inbox: efeito repetido e ack sem efeito. Saga: efeito sem o processo e processo sem o efeito.
 - O cenário mostra o problema e o que queremos melhorar nos dois caminhos. "Em tela" marca o caminho do diagrama.
-- A aresta acesa segue o evento da etapa, da origem para o destino, saindo do lado do nó que aponta para o destino. Cada caminho tem o próprio desenho. Um segundo participante de uma corrida é um nó próprio, e o primeiro permanece visível.
-- Não escrever que Outbox ou Inbox garantem entrega exatamente uma vez.
-- O ack do broker fica fora da transação local.
+- A aresta acesa segue o evento da etapa, da origem para o destino, saindo do lado do nó que aponta para o destino. Cada caminho tem o próprio desenho, e a coordenada de cada nó fica no conteúdo desse caminho. Um segundo participante de uma corrida é um nó próprio, e o primeiro permanece visível.
+- Não escrever que Outbox, Inbox ou Saga garantem conclusão exatamente uma vez.
+- O ack do broker fica fora da transação local. A compensação da Saga é outro passo local, e também pode falhar.
 
 ## Exercícios
 

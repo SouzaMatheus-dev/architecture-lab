@@ -14,8 +14,8 @@ export default function HomePage() {
           <h1>Veja o padrão acontecer.</h1>
           <p className="lede">
             O Architecture Lab percorre um fluxo real, pausa em cada evento e mostra o que uma falha
-            deixa para trás. Os dois primeiros módulos completos são o Transactional Outbox e o
-            Transactional Inbox.
+            deixa para trás. Os módulos completos de consistência são o Transactional Outbox, o
+            Transactional Inbox e a Saga.
           </p>
           <div className="actions">
             <Link className="button" href="/patterns/transactional-outbox">
@@ -24,15 +24,19 @@ export default function HomePage() {
             <Link className="button secondary" href="/patterns/transactional-inbox">
               Abrir o Inbox
             </Link>
+            <Link className="button secondary" href="/patterns/saga">
+              Abrir a Saga
+            </Link>
           </div>
         </div>
         <aside className="hero-card">
-          <p className="kicker">O par</p>
+          <p className="kicker">Consistência</p>
           <ol>
             <li>O Outbox grava a mudança e a intenção de publicar juntas.</li>
             <li>A Inbox grava o efeito e o identificador da mensagem juntos.</li>
             <li>O ack do broker fica fora dessas transações.</li>
-            <li>Nenhum dos dois entrega exatamente uma vez sozinho.</li>
+            <li>A Saga grava o passo e compensa com outro passo local.</li>
+            <li>Nenhum dos três conclui o trabalho exatamente uma vez sozinho.</li>
           </ol>
         </aside>
       </section>

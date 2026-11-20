@@ -18,7 +18,7 @@ A animação é a aula. Quem assiste pode nunca ter visto Kafka, transação ou 
 - A aresta acesa segue o evento da etapa, da origem para o destino.
 - A linha sai do lado do nó que aponta para o destino. A volta da resposta, do ack e da marcação percorre o caminho curto.
 - Outra aresta pode acompanhar um segundo movimento do mesmo passo. As duas permanecem visíveis.
-- Cada caminho tem o próprio desenho. Sem o padrão, o diagrama não reaproveita o vão de um componente que aquele caminho não tem.
+- Cada caminho tem o próprio desenho, e a coordenada de cada nó fica no conteúdo desse caminho. Sem o padrão, o diagrama não reaproveita o vão de um componente que aquele caminho não tem.
 - Um segundo participante de uma corrida é um nó próprio. O primeiro permanece na tela enquanto o segundo se move.
 - Se o texto da etapa diz que algo se moveu, uma aresta ativa liga a origem e o destino desse evento.
 - `prefers-reduced-motion` tira o tracejado e mantém a aresta acesa.

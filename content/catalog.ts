@@ -38,7 +38,7 @@ export const patternCatalog: readonly PatternSummary[] = [
       "Coordena um processo que atravessa serviços e compensa os passos já concluídos quando um deles falha.",
     category: "Consistência",
     complexity: "Avançado",
-    status: "planned",
+    status: "available",
     language: "pt-BR",
   },
   {
