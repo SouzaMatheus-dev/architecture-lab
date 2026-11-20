@@ -2,6 +2,9 @@ import path from "node:path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    agentUpgrade: "security",
+  },
   reactStrictMode: true,
   allowedDevOrigins: ["127.0.0.1"],
   transpilePackages: ["@architecture-lab/content", "@architecture-lab/simulation-engine"],
