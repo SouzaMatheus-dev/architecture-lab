@@ -29,6 +29,16 @@ export const withTables = [
   { id: "consumerLog", title: "Consumidor", columns: ["Evento", "Resultado"] },
 ] as const satisfies readonly TableSchema[];
 
+export const withLayout = {
+  client: { x: 0, y: 80 },
+  "order-service": { x: 220, y: 80 },
+  database: { x: 450, y: 0 },
+  worker: { x: 450, y: 180 },
+  "worker-b": { x: 450, y: 320 },
+  kafka: { x: 680, y: 180 },
+  consumer: { x: 910, y: 180 },
+} as const;
+
 export const withNodeIds = withNodes.map((node) => node.id);
 
 export const naiveNodes = [
@@ -50,5 +60,13 @@ export const naiveTables = [
   { id: "orders", title: "Orders", columns: ["Pedido", "Cliente", "Estado"] },
   { id: "consumerLog", title: "Consumidor", columns: ["Evento", "Resultado"] },
 ] as const satisfies readonly TableSchema[];
+
+export const naiveLayout = {
+  client: { x: 0, y: 80 },
+  "order-service": { x: 260, y: 80 },
+  database: { x: 540, y: 0 },
+  kafka: { x: 540, y: 200 },
+  consumer: { x: 820, y: 200 },
+} as const;
 
 export const naiveNodeIds = naiveNodes.map((node) => node.id);

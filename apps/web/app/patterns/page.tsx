@@ -16,8 +16,8 @@ export default function CatalogPage() {
         <p className="kicker">Catálogo</p>
         <h1>Padrões com um modelo só.</h1>
         <p className="lede">
-          Cada módulo separa o problema, o fluxo, a falha e o exemplo. Outbox e Inbox já podem ser
-          percorridos. Os demais entram como nova definição, no mesmo motor.
+          Cada módulo separa o problema, o fluxo, a falha e o exemplo. Outbox, Inbox e Saga já podem
+          ser percorridos. Os demais entram como nova definição, no mesmo motor.
         </p>
       </header>
       <section className="section" aria-label="Módulos">

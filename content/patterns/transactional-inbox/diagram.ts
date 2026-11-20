@@ -20,6 +20,13 @@ export const withTables = [
   { id: "delivery", title: "Entrega", columns: ["Mensagem", "Ack"] },
 ] as const satisfies readonly TableSchema[];
 
+export const withLayout = {
+  kafka: { x: 0, y: 40 },
+  consumer: { x: 280, y: 40 },
+  database: { x: 560, y: 20 },
+  rival: { x: 280, y: 220 },
+} as const;
+
 export const withNodeIds = withNodes.map((node) => node.id);
 
 export const naiveNodes = [
@@ -37,5 +44,11 @@ export const naiveTables = [
   { id: "charges", title: "Charges", columns: ["Cobrança", "Pedido", "Estado"] },
   { id: "delivery", title: "Entrega", columns: ["Mensagem", "Ack"] },
 ] as const satisfies readonly TableSchema[];
+
+export const naiveLayout = {
+  kafka: { x: 0, y: 80 },
+  consumer: { x: 280, y: 80 },
+  database: { x: 560, y: 80 },
+} as const;
 
 export const naiveNodeIds = naiveNodes.map((node) => node.id);

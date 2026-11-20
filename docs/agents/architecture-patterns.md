@@ -15,6 +15,8 @@ Quem é novo na área, leigo ou da área de negócio consegue ver na animação 
 
 Para o Outbox, a entrega repetida e a idempotência do consumidor permanecem visíveis.
 
-No caminho sem o padrão, as duas ordens da operação partida ficam visíveis. No Outbox: pedido sem evento e evento sem pedido. No Inbox: efeito repetido e ack sem efeito.
+No caminho sem o padrão, as duas ordens da operação partida ficam visíveis. No Outbox: pedido sem evento e evento sem pedido. No Inbox: efeito repetido e ack sem efeito. Na Saga: efeito sem o processo e processo sem o efeito.
 
-Os exercícios do módulo perguntam essas duas ordens e o que o padrão não garante. Uma pergunta isolada não cobre o roteiro.
+A Saga não torna o processo exatamente uma vez nem isolado. A compensação é outro passo local, e também pode falhar. O participante precisa reconhecer uma repetição.
+
+Os exercícios do módulo perguntam essas duas ordens e o que o padrão não garante. Uma pergunta isolada não cobre o roteiro. O caminho sem o padrão declara as duas falhas, e o teste lê essa declaração em todo módulo disponível.

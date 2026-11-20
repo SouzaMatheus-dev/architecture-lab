@@ -15,10 +15,10 @@ Trabalho de especialista sênior em design, frontend, UX e backend. O aluno vê 
 
 ## Página de padrão
 
-- "Como ler a simulação" vem antes do laboratório, com os quatro passos da home: cenário, percurso, agora, registros. O texto de abertura usa a largura da página. Os quatro passos ficam numa faixa abaixo.
+- "Como ler a simulação" vem antes do laboratório, em toda página de padrão, inclusive na planejada. Os quatro passos são os da home: cenário, percurso, agora, registros. O texto de abertura usa a largura da página. Os quatro passos ficam numa faixa abaixo. A página planejada diz que a simulação ainda não existe.
 - O percurso mostra a trilha inteira, sem rolagem horizontal. Cada etapa é um botão com o nome. A frase da etapa atual fica numa faixa abaixo da trilha, na largura da página, com uma marca que permanece. O número distingue o que já passou, a etapa atual e o que vem depois.
 - A troca de etapa destaca o painel Agora com o número da etapa e uma marca persistente. Menos movimento tira a animação.
-- A aresta acesa segue o evento da etapa, da origem para o destino, saindo do lado do nó que aponta para o destino. Cada caminho tem o próprio desenho. Um segundo participante de uma corrida é um nó próprio, e o primeiro permanece visível.
+- A aresta acesa segue o evento da etapa, da origem para o destino, saindo do lado do nó que aponta para o destino. Cada caminho tem o próprio desenho, e a coordenada de cada nó fica no conteúdo desse caminho. Um segundo participante de uma corrida é um nó próprio, e o primeiro permanece visível.
 - Controles e opções de cenário mostram ponteiro e o mesmo hover.
 - O caminho sem o padrão mostra as duas ordens da operação partida.
 - O cenário mostra o problema e o que queremos melhorar. "Em tela" marca o caminho do diagrama.
@@ -27,4 +27,4 @@ Trabalho de especialista sênior em design, frontend, UX e backend. O aluno vê 
 
 ## Precisão
 
-Não afirmar entrega exatamente uma vez. O ack do broker fica fora da transação local. Texto do aluno em português do Brasil. Identificadores em inglês.
+Não afirmar entrega exatamente uma vez. O ack do broker fica fora da transação local. Na Saga, a compensação é outro passo local. Texto do aluno em português do Brasil. Identificadores em inglês.

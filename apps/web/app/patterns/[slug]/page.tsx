@@ -2,6 +2,7 @@ import { PatternArticle } from "@/features/patterns/pattern-article";
 import { SimulationBriefing } from "@/features/patterns/simulation-briefing";
 import { SimulationLab } from "@/features/simulation/simulation-lab";
 import { getPatternPage, listPatterns } from "@architecture-lab/content";
+import type { PatternSummary, PlannedBrief } from "@architecture-lab/content";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -41,19 +42,7 @@ export default async function PatternPage({ params }: { params: Promise<{ slug: 
   }
 
   if (page.status === "planned") {
-    return (
-      <div className="shell">
-        <header className="page-intro">
-          <p className="kicker">{page.summary.category}</p>
-          <h1>{page.summary.title}</h1>
-          <p className="lede">{page.summary.summary}</p>
-          <p className="lede">
-            Este módulo ainda não tem simulação. Outbox e Inbox mostram o contrato do motor; o
-            próximo padrão entra como nova definição e novo conteúdo.
-          </p>
-        </header>
-      </div>
-    );
+    return <PlannedPattern summary={page.summary} brief={page.brief} />;
   }
 
   const { pattern } = page;
@@ -70,6 +59,51 @@ export default async function PatternPage({ params }: { params: Promise<{ slug: 
       <SimulationBriefing flow={pattern.article.flow} />
       <SimulationLab modes={pattern.modes} contrast={pattern.contrast} />
       <PatternArticle pattern={pattern} />
+    </div>
+  );
+}
+
+const plannedReading = {
+  id: "como-ler",
+  title: "Como ler a simulação",
+  paragraphs: [
+    "A bancada deste módulo vai seguir os mesmos quatro passos. O relógio da tela só regula a velocidade. A sequência nasce do roteiro, não de um serviço real.",
+  ],
+};
+
+function PlannedPattern({
+  summary,
+  brief,
+}: {
+  summary: PatternSummary;
+  brief?: PlannedBrief;
+}) {
+  return (
+    <div className="shell pattern-page">
+      <header className="page-intro">
+        <p className="kicker">
+          {summary.category} · {summary.complexity}
+        </p>
+        <h1>{summary.title}</h1>
+        <p className="lede">{summary.summary}</p>
+      </header>
+      <SimulationBriefing flow={plannedReading} />
+      <p className="lede">Este módulo ainda não tem simulação.</p>
+      {brief ? (
+        <section className="lab-toolbar" aria-label="Proposta do módulo">
+          <div className="contrast">
+            <article>
+              <p className="contrast-label">Problema</p>
+              <p>{brief.problem}</p>
+            </article>
+            <article>
+              <p className="contrast-label">O que queremos melhorar</p>
+              <p>{brief.aim}</p>
+            </article>
+          </div>
+          <p className="lede">{brief.limit}</p>
+        </section>
+      ) : null}
     </div>
   );
 }

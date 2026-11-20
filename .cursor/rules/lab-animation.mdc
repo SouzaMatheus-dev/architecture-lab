@@ -9,7 +9,7 @@ A animação é o meio principal de ensino. O aluno pode ser novo na área, leig
 
 - Todos os fluxos publicados andam juntos: com o padrão, sem ele e em cada falha.
 - A aresta acesa da etapa segue o evento, da origem para o destino, saindo do lado do nó que aponta para o destino.
-- Cada caminho tem o próprio desenho. Um segundo participante de uma corrida é um nó próprio.
+- Cada caminho tem o próprio desenho, e a coordenada de cada nó fica no conteúdo desse caminho. Um segundo participante de uma corrida é um nó próprio.
 - Um passo cujo texto descreve um movimento acende a aresta que liga esse movimento.
 - Menos movimento tira o tracejado e mantém a aresta acesa.
 - A mesma decisão vale para Outbox, Inbox e para o próximo padrão, antes de ele ser publicado.

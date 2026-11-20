@@ -1,0 +1,9 @@
+{
+  "slug": "saga",
+  "title": "Saga",
+  "summary": "Coordena um processo que atravessa serviços e compensa os passos já concluídos quando um deles falha.",
+  "category": "Consistência",
+  "complexity": "Avançado",
+  "status": "available",
+  "language": "pt-BR"
+}

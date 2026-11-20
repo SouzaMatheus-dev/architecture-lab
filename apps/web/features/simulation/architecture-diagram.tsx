@@ -15,28 +15,6 @@ import {
 import { useEffect, useState } from "react";
 import "@xyflow/react/dist/style.css";
 
-const POSITIONS: Record<string, { x: number; y: number }> = {
-  client: { x: 0, y: 80 },
-  "order-service": { x: 220, y: 80 },
-  database: { x: 450, y: 0 },
-  worker: { x: 450, y: 180 },
-  kafka: { x: 680, y: 180 },
-  consumer: { x: 910, y: 180 },
-  "transactional-inbox:kafka": { x: 0, y: 40 },
-  "transactional-inbox:consumer": { x: 280, y: 40 },
-  "transactional-inbox:database": { x: 560, y: 20 },
-  "transactional-inbox:rival": { x: 280, y: 220 },
-  "direct-consume:kafka": { x: 0, y: 80 },
-  "direct-consume:consumer": { x: 280, y: 80 },
-  "direct-consume:database": { x: 560, y: 80 },
-  "direct-publish:client": { x: 0, y: 80 },
-  "direct-publish:order-service": { x: 260, y: 80 },
-  "direct-publish:database": { x: 540, y: 0 },
-  "direct-publish:kafka": { x: 540, y: 200 },
-  "direct-publish:consumer": { x: 820, y: 200 },
-  "transactional-outbox:worker-b": { x: 450, y: 320 },
-};
-
 const STATUS_LABEL: Record<string, string> = {
   inactive: "em espera",
   processing: "processando",
@@ -81,10 +59,13 @@ function LabNode({ data }: NodeProps<Node<LabData, "lab">>) {
 
 const nodeTypes = { lab: LabNode };
 
-function nodeOrigin(definitionId: string, nodeId: string, index: number) {
+function nodeOrigin(
+  layout: Readonly<Record<string, { x: number; y: number }>>,
+  nodeId: string,
+  index: number,
+) {
   return (
-    POSITIONS[`${definitionId}:${nodeId}`] ??
-    POSITIONS[nodeId] ?? {
+    layout[nodeId] ?? {
       x: (index % 3) * 260,
       y: Math.floor(index / 3) * 180,
     }
@@ -136,9 +117,11 @@ function FrameFit({ signature }: { signature: string }) {
 export function ArchitectureDiagram({
   definition,
   frame,
+  layout,
 }: {
   definition: SimulationDefinition;
   frame: SimulationFrame;
+  layout: Readonly<Record<string, { x: number; y: number }>>;
 }) {
   const [reduceMotion, setReduceMotion] = useState(false);
 
@@ -154,7 +137,7 @@ export function ArchitectureDiagram({
   const originById = new Map<string, { x: number; y: number }>();
   const nodes: Node<LabData, "lab">[] = definition.nodes.map((node, index) => {
     const component = statusById.get(node.id);
-    const position = nodeOrigin(definition.id, node.id, index);
+    const position = nodeOrigin(layout, node.id, index);
     originById.set(node.id, position);
     return {
       id: node.id,

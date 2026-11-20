@@ -45,7 +45,8 @@ O MVP é uma aplicação web estática e interativa. Não adicionar autenticaç�
 - Tratar consumidor idempotente como parte do desenho, não como detalhe opcional.
 - Nomear simplificações didáticas, inclusive limites de retry e a escolha entre polling e CDC.
 - O exemplo .NET deve usar a mesma transação local para o pedido e a mensagem. O dispatcher simplificado deve dizer o que falta para produção.
-- No caminho sem o padrão, as duas ordens da operação partida ficam visíveis. No Outbox: pedido sem evento e evento sem pedido. No Inbox: efeito repetido e ack sem efeito.
+- No caminho sem o padrão, as duas ordens da operação partida ficam visíveis. No Outbox: pedido sem evento e evento sem pedido. No Inbox: efeito repetido e ack sem efeito. Na Saga: efeito sem o processo e processo sem o efeito.
+- A Saga não torna o processo exatamente uma vez nem isolado. A compensação é outro passo local, e também pode falhar. O participante precisa reconhecer uma repetição.
 - Cada laboratório mostra, no cenário, o problema do caminho sem o padrão e o que o padrão quer melhorar. As duas frases permanecem visíveis. A marca "Em tela" indica qual caminho o diagrama está percorrendo.
 
 ## Interface
@@ -58,12 +59,13 @@ O MVP é uma aplicação web estática e interativa. Não adicionar autenticaç�
 - O diagrama pode ser ampliado. A lista de estados continua disponível em telas estreitas.
 - A animação é o principal meio de ensino, em todo fluxo publicado: com o padrão, sem ele e em cada falha.
 - A aresta acesa da etapa segue o evento dessa etapa, da origem para o destino, saindo do lado do nó que aponta para o destino. Outra aresta acesa pode acompanhar um segundo movimento do mesmo passo. Menos movimento tira o tracejado e mantém a aresta acesa.
-- Cada caminho tem o próprio desenho. Um segundo participante de uma corrida é um nó próprio quando a falha anima essa corrida. O primeiro permanece visível.
+- Cada caminho tem o próprio desenho, e a coordenada de cada nó fica no conteúdo desse caminho. O componente do diagrama não cita o slug do padrão. Um segundo participante de uma corrida é um nó próprio quando a falha anima essa corrida. O primeiro permanece visível.
 - O laboratório se lê em quatro passos: cenário, percurso, o que acontece agora e registros.
 - O percurso mostra a trilha inteira, sem rolagem horizontal. Cada etapa é um botão com o nome. A frase da etapa atual fica numa faixa abaixo da trilha, na largura da página, com uma marca que permanece. O número distingue o que já passou, a etapa atual e o que vem depois.
-- A seção "Como ler a simulação" fica antes do laboratório, em toda página de padrão, com os mesmos quatro passos da home. O texto de abertura usa a largura da página. Os quatro passos ficam numa faixa abaixo.
+- A seção "Como ler a simulação" fica antes do laboratório, em toda página de padrão, inclusive na página planejada, com os mesmos quatro passos da home. O texto de abertura usa a largura da página. Os quatro passos ficam numa faixa abaixo. A página planejada diz que a simulação ainda não existe.
 - Cada troca de etapa destaca o painel ao lado do diagrama. O destaque traz o número da etapa e uma marca persistente. A animação some quando o usuário pede menos movimento.
 - Cada padrão publicado tem um conjunto de exercícios. As questões cobrem o que o padrão não garante e as duas ordens da operação partida. Cada questão é numerada e abre a própria resposta.
+- O caminho sem o padrão declara as duas falhas da operação partida. O teste do catálogo lê essa declaração em todo módulo disponível.
 - Catálogo e home ligam cada padrão, inclusive o planejado, à própria página. A home mostra a lista inteira. No catálogo, o título da página é seguido pelos títulos dos módulos, sem pular nível.
 - O botão de copiar exemplo inclui o nome do arquivo. O zoom do diagrama fala português: Ampliar, Reduzir e Ajustar à tela.
 - A página inexistente usa o título "Página não encontrada".
