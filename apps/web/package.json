@@ -12,7 +12,7 @@
     "@architecture-lab/simulation-engine": "workspace:*",
     "@xyflow/react": "^12.8.6",
     "motion": "^12.23.24",
-    "next": "^16.0.0",
+    "next": "16.4.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
