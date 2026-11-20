@@ -91,7 +91,12 @@ test("abre a Saga, avança uma etapa e compensa a reserva recusada", async ({ pa
   await page.goto("/patterns/saga");
   await expect(page.getByRole("heading", { level: 1, name: "Saga" })).toBeVisible();
   await page.locator("label.choice", { hasText: "Sem Saga" }).click();
-  await expect(page.getByText("efeito sem o processo")).toBeVisible();
+  const contrast = page.locator(".contrast");
+  await expect(contrast.getByText("efeito sem o processo")).toBeVisible();
+  await expect(contrast.getByRole("article").filter({ hasText: "Problema" })).toHaveAttribute(
+    "aria-current",
+    "true",
+  );
   await page.locator("label.choice", { hasText: "Com Saga" }).click();
   await page.locator("label.choice", { hasText: "Estoque recusa" }).click();
   await expect(page.getByText("Pronta para iniciar")).toBeVisible();
